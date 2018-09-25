@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MemoryPalace</string>
+    <string name="title_activity_view_palaces">ViewPalaces</string>
+</resources>
