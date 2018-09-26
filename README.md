@@ -1,10 +1,10 @@
 # Memory Palace
 
-## Team_14
+## Team_14:
 * Inna Zhogova  
 * Paul Liakhov
 
-## System Description
+## System Description:
 * The Memory Palace is an application that will assist you in maintaining and practicing the Mind Palace Technique. 
 The Memory Palace is a mnemonic device(Memory Technique) in which you use a familiar place(A house in the context of our application) 
 that you have memorized, to map out a route containing various loci(Locations), with each loci having a visual association with a memory 
