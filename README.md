@@ -1,6 +1,6 @@
-#Memory Palace
+# Memory Palace
 
-# Team_14
+## Team_14
 * Inna Zhogova  
 * Paul Liakhov
 
