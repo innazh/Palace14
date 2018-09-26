@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MemoryPalace</string>
-    <string name="title_activity_view_palaces">ViewPalaces</string>
+    <string name="templateOne">Luxury 1 Bedroom Bungalow</string>
+    <string name="templateTwo">First Floor Single House</string>
+    <string name="templateThree">Standard Bungalow</string>
+    <string name="templateFour">First Floor Luxury Single Cottage</string>
 </resources>

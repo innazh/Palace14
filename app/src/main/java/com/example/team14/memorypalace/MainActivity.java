@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         choosePalace = findViewById(R.id.choosePalace);
         buildPalace = findViewById(R.id.buildPalace);
         palaceList = findViewById(R.id.palaceList);
@@ -34,15 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
         palaceList.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ViewPalaces.class);
+                Intent intent = new Intent(MainActivity.this, ViewPalaceList.class);
                 startActivity(intent);
             }
         });
-    }
-
-
-    public void choosePalaceIsClicked(View v){
-
     }
 
 }

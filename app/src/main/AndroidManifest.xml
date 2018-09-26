@@ -9,26 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ChoosePalace" />
+        <activity android:name=".BuildPalace" />
         <activity
-            android:name=".ChoosePalace"
-            />
-        <activity
-            android:name=".BuildPalace" />
-
-        <activity
-            android:name=".ViewPalaces"
-            android:label="@string/title_activity_view_palaces"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:name=".ViewPalaceList"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ViewPalace" />
+        <activity android:name=".ChoosePalaceSave"></activity>
     </application>
 
 </manifest>
