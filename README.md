@@ -12,7 +12,7 @@ or thought. The method utilizes your visual-spatial ability within the context o
 due amount of time spent there. Essentially, our Application will assist the user in laying out their mind palace, mapping their memory route, 
 labeling each loci and associating specific thoughts, and maintaining all of it.
 
-##Learning outcomes:
+## Learning outcomes:
 - Defining a list of requirements for a project
 - System design development
 - Prototyping of a system
