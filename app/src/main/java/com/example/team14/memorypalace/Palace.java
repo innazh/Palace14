@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.widget.ImageView;
-
+import com.example.team14.memorypalace.Object_assoc;
 import java.io.Serializable;
 
 public class Palace implements Serializable {
@@ -12,6 +12,7 @@ public class Palace implements Serializable {
     String name;
     Bitmap img;
     String imagePath;
+
 
     Palace(String palaceName, String floorPath){
 

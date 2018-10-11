@@ -1,5 +1,7 @@
 package com.example.team14.memorypalace;
 
+import android.content.Context;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,10 +24,13 @@ public class PalaceList implements Serializable {
 
         ObjectOutputStream objToInternal = null;
 
+        // Shto blyat delayu s' kontekst
+        Context context = view.getContext();
+
         // Add New Palace to list of Palaces
         try {
 
-            file = new File("palaces.tmp");
+            file = new File(context.getFilesDir(),"palaces.tmp");
 
             fos = new FileOutputStream(file);
             objToInternal = new ObjectOutputStream(fos);

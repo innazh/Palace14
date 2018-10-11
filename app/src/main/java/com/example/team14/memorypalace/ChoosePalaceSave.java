@@ -64,14 +64,14 @@ public class ChoosePalaceSave extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
                                         // get user input and set it to result
                                         // edit text
-                                        result.setText(userInput.getText());
+                                        //result.setText(userInput.getText());
 
                                         // Create a new palace with the Name and Image
                                         Palace myPalace = new Palace(userInput.getText().toString(),imageName);
 
                                         PalaceList palaces = new PalaceList();
 
-                                        System.out.println(palace);
+                                        System.out.println(myPalace.getName());
                                         // Add palace to existing list of Palaces.
                                         palaces.addPalace(myPalace);
 
