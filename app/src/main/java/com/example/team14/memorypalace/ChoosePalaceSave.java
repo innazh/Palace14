@@ -74,7 +74,7 @@ public class ChoosePalaceSave extends AppCompatActivity {
                                         System.out.println(palace);
                                         // Add palace to existing list of Palaces.
                                         palaces.addPalace(myPalace);
-                                        
+
                                     }
                                 })
                         .setNegativeButton("Cancel",

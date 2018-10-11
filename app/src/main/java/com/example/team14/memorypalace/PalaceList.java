@@ -38,7 +38,7 @@ public class PalaceList implements Serializable {
             fos.flush();
             objToInternal.flush();
 
-            // Write new Palace to file(Internal Storage????)
+            // Write new Palace to file(POSSIBLY NEEDS .writeObject() OVERRIDING)
             objToInternal.writeObject(plToAdd);
 
             // Add palace to ArrayList of Palaces
