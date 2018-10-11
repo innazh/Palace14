@@ -22,12 +22,13 @@ public class ChoosePalaceSave extends AppCompatActivity {
     final Context context = this;
     Button b;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_palace_save);
 
-        //Find things by ID
+        //Find things by id
         b = findViewById(R.id.createPalaceBtn);
         addName = findViewById(R.id.palaceChoiceName);
         palace = findViewById(R.id.palaceChoice);
@@ -64,6 +65,16 @@ public class ChoosePalaceSave extends AppCompatActivity {
                                         // get user input and set it to result
                                         // edit text
                                         result.setText(userInput.getText());
+
+                                        // Create a new palace with the Name and Image
+                                        Palace myPalace = new Palace(userInput.getText().toString(),imageName);
+
+                                        PalaceList palaces = new PalaceList();
+
+                                        System.out.println(palace);
+                                        // Add palace to existing list of Palaces.
+                                        palaces.addPalace(myPalace);
+                                        
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -79,11 +90,16 @@ public class ChoosePalaceSave extends AppCompatActivity {
                 // show it
                 alertDialog.show();
 
+
+
             }
         });
 
         //Display the blueprint
         palace.setImageResource(resImgID);
+
+
+
 
     }
 }
