@@ -20,17 +20,20 @@ public class PalaceList implements Serializable {
 
         File file;
 
+
+        //File fileDir = new File(getFilesDir(),file);
+
         FileOutputStream fos = null;
 
         ObjectOutputStream objToInternal = null;
 
         // Shto blyat delayu s' kontekst
-        Context context = view.getContext();
+       // Context context = view.getContext();
 
         // Add New Palace to list of Palaces
         try {
 
-            file = new File(context.getFilesDir(),"palaces.tmp");
+            file = new File("C:\\Users\\Paul\\Documents\\GitHub\\Palace14\\app\\src\\main\\java\\com\\example\\team14\\memorypalace\\palaces.tmp");
 
             fos = new FileOutputStream(file);
             objToInternal = new ObjectOutputStream(fos);
