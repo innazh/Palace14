@@ -71,7 +71,7 @@ public class ChoosePalaceSave extends AppCompatActivity {
                                         //test
                                         System.out.println(myPalace.getName());
                                         // Add palace to existing list of Palaces.
-                                        palaces.addPalace(myPalace, getApplicationContext());
+                                        palaces.createPalace(myPalace, getApplicationContext(), getFilesDir());
                                         finish();
                                     }
                                 })

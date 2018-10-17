@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Palace implements Serializable {
 
     String name;
-    Bitmap img;
+    //Bitmap img;
     String imagePath; //Did you mean img name?
 
 
@@ -18,12 +18,17 @@ public class Palace implements Serializable {
         this.imagePath = floorPath;
 
         // Assign the image(path to Image) and then convert image to compatible format(Bitmap)
-        img = BitmapFactory.decodeFile(this.imagePath);
+        //img = BitmapFactory.decodeFile(this.imagePath);
 
     }
 
     public String getName(){
         return this.name;
+    }
+
+    //Image Name/Path (?)
+    public String getImagePath(){
+        return this.imagePath;
     }
 
     @Override
