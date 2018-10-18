@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import static android.content.Context.MODE_PRIVATE;
 
 public class PalaceList implements Serializable {
-    ArrayList<Palace> myPalaces;
+    private ArrayList<Palace> myPalaces;
 
     public  PalaceList(){
             this.myPalaces = new ArrayList<Palace>();
@@ -103,5 +103,13 @@ public class PalaceList implements Serializable {
 
     public int getPalaceListSize(){
         return this.myPalaces.size();
+    }
+
+    public Palace getPalace(int indx){
+        return this.myPalaces.get(indx);
+    }
+
+    public ArrayList<Palace> getPalaceArrayList(){
+        return this.myPalaces;
     }
 }

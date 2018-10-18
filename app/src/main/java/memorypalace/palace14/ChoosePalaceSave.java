@@ -22,7 +22,7 @@ public class ChoosePalaceSave extends AppCompatActivity {
     ImageView palaceImg; //The image of the current palace
     TextView addName; //The name of the current palace
     final Context context = this;
-    Button b;
+    Button b, c;
 
 
     @Override
@@ -31,6 +31,7 @@ public class ChoosePalaceSave extends AppCompatActivity {
         setContentView(R.layout.activity_choose_palace_save);
 
         //Find things by id
+        c = findViewById(R.id.choosePalaceCancel);
         b = findViewById(R.id.createPalaceBtn);
         addName = findViewById(R.id.palaceChoiceName);
         palaceImg = findViewById(R.id.palaceChoice);
@@ -49,6 +50,13 @@ public class ChoosePalaceSave extends AppCompatActivity {
         else if (imageName.compareTo("four")==0) addName.setText("First Floor Luxury Single Cottage");
 
         //Set up buttons' onClick functionality
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 LayoutInflater li =  LayoutInflater.from(context);
