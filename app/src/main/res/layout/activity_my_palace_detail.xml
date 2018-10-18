@@ -12,75 +12,84 @@
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="93dp"
         android:layout_marginLeft="152dp"
         android:layout_marginStart="152dp"
         android:layout_marginTop="16dp"
         android:text="@string/title_home"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:menu="@menu/navigation" />
+        app:layout_constraintTop_toBottomOf="@+id/message">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="68dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/myPalaceImg"
+            android:layout_width="368dp"
+            android:layout_height="302dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="90dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="90dp">
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/stool" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/bookcase" />
+                <ImageView
+                    android:id="@+id/objectStool"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    app:srcCompat="@drawable/stool" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/barstool" />
+                <ImageView
+                    android:id="@+id/objectBookShelf"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    app:srcCompat="@drawable/bookcase" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="50dp"
-                android:layout_height="100px"
-                android:layout_margin="8dp"
-                app:srcCompat="@drawable/diningset" />
-        </LinearLayout>
-    </ScrollView>
+                <ImageView
+                    android:id="@+id/objectBarstool"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="8dp"
+                    app:srcCompat="@drawable/barstool" />
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="142dp" />
+                <ImageView
+                    android:id="@+id/objectDiningset"
+                    android:layout_width="50dp"
+                    android:layout_height="100px"
+                    android:layout_margin="8dp"
+                    app:srcCompat="@drawable/diningset" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

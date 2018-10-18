@@ -17,10 +17,10 @@ import memorypalace.palace14.classes.PalaceList;
 
 public class ViewPalaceList  extends AppCompatActivity {
 
-    PalaceList palacesCreated;
-    ListView palaceListView;
-    MyAdapter adapter;
-    TextView emptyPalaceList;
+    private PalaceList palacesCreated;
+    private ListView palaceListView;
+    private MyAdapter adapter;
+    private TextView emptyPalaceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,6 @@ public class ViewPalaceList  extends AppCompatActivity {
         System.out.println("!!!!!!!NUMBER OF PALACES: " + palacesCreated.getPalaceListSize());
         if(palacesCreated.getPalaceListSize()<1){
             //show an empty list
-            emptyPalaceList.setText("There's nothing here yet.");
             emptyPalaceList.setVisibility(View.VISIBLE);
         }
         else{
@@ -59,7 +58,16 @@ public class ViewPalaceList  extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(ViewPalaceList.this, MyPalaceDetail.class);
-                    intent.putExtra("ImageName", "three");
+
+                    //Create a bundle to pass a PalaceList as an extra to the new activity
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("palaceList", palacesCreated);
+
+                    //Pass in the position of a clicked palace
+                    bundle.putInt("position", position);
+
+                    intent.putExtra("list", bundle);
+
                     startActivity(intent);
                 }
             });
