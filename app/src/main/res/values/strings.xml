@@ -10,7 +10,7 @@
     <string name="rename_palace">Rename Palace</string>
     <!--<string name="edit_palace">Edit Palace</string>-->
     <string name="delete_palace">Delete Palace</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">Add objects</string>
 
     <string name="title_activity_my_palace_detail">MyPalaceDetail</string>
     <string name="title_section1">Section 1</string>

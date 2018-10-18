@@ -1,11 +1,15 @@
 package memorypalace.palace14;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +28,9 @@ public class MyPalaceDetail extends AppCompatActivity {
     //Bottom navigation menu listener
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        // This defines your touch listener
+
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -50,7 +57,38 @@ public class MyPalaceDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_palace_detail);
 
-        //Initialize variables:
+        //Function that initializes all the variables
+        init();
+
+        //Display the right blueprint on the screen
+        int resImgID = getResources().getIdentifier(palaceClicked.getImagePath(), "drawable", getPackageName());
+        myPalaceDetailImg.setImageResource(resImgID);
+
+        // Assign the touch listener to your view which you want to move
+        objStool.setOnTouchListener(new MyTouchListener());
+        objBarStool.setOnTouchListener(new MyTouchListener());
+        objBookshelf.setOnTouchListener(new MyTouchListener());
+        objDinningSet.setOnTouchListener(new MyTouchListener());
+    }
+
+    //Create a class file for this
+    private final class MyTouchListener implements View.OnTouchListener {
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                ClipData data = ClipData.newPlainText("", "");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(
+                        view);
+                view.startDrag(data, shadowBuilder, view, 0);
+                //view.setVisibility(View.INVISIBLE);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public void init(){
+        //Initialize the blueprint and objects:
         myPalaceDetailImg = findViewById(R.id.myPalaceImg);
         objStool = findViewById(R.id.objectStool);
         objBarStool = findViewById(R.id.objectBarstool);
@@ -58,22 +96,26 @@ public class MyPalaceDetail extends AppCompatActivity {
         objBookshelf = findViewById(R.id.objectBookShelf);
 
         mTextMessage = (TextView) findViewById(R.id.message);
+
+        //Initialize the bottom navigation menu
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         Intent intent = getIntent();
 
         //Get data from the received intent:
-        //Get position of the palace clicked on the list
         Bundle bundle = intent.getBundleExtra("list");
         listOfMyPalaces =  (PalaceList) bundle.getSerializable("palaceList");
         palacePosition = bundle.getInt("position");
-
+        //Get position of the palace clicked on the list
         palaceClicked = listOfMyPalaces.getPalace(palacePosition);
 
-        //Display the right blueprint on the screen
-        int resImgID = getResources().getIdentifier(palaceClicked.getImagePath(), "drawable", getPackageName());
-        myPalaceDetailImg.setImageResource(resImgID);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+        }
+        return true;
+    }
 }
