@@ -59,6 +59,10 @@ public class MyPalaceDetail extends AppCompatActivity {
                     return true;
                 case R.id.navigation_delete_palace:
                     mTextMessage.setText(R.string.delete_palace);
+                    System.out.println(listOfMyPalaces + "       " + palacePosition);
+                    listOfMyPalaces.deletePalace(palacePosition, getApplicationContext());
+                    finish();
+                    startActivity(new Intent(MyPalaceDetail.this, ViewPalaceList.class));
                     return true;
             }
             return false;

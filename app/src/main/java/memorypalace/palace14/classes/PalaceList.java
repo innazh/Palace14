@@ -95,6 +95,34 @@ public class PalaceList implements Serializable {
         } finally { in.close(); }
     }
 
+    public boolean deletePalace(int position, Context context){
+        // Remove the palace at position from the arrayList of Palaces
+        boolean res=true;
+        ObjectOutputStream objOutStream = null;
+        FileOutputStream fos = null;
+        String deletedPalaceName;
+
+        if(!this.myPalaces.isEmpty()) {
+            deletedPalaceName = this.myPalaces.get(position).getName();
+            this.myPalaces.remove(position);
+
+            //Now we need to rewrite the file.
+            //Initialize FileOutPutStream to the file "palaces.tmp" & private access internal data storage.
+            try {
+                fos = context.openFileOutput("palaces.tmp", MODE_PRIVATE);
+                //Initialize object output stream.
+                objOutStream = new ObjectOutputStream(fos);
+                //Writes an array list to a file
+                objOutStream.writeObject(this.myPalaces);
+            } catch (IOException e) {
+                System.out.println("IOException in deletePalace inside the PalaceList class");
+            }
+            //Output the path where the file was saved
+            Toast.makeText(context, "Palace " + deletedPalaceName + " was successfully deleted", Toast.LENGTH_LONG).show();
+        }
+        else res=false;
+        return res;
+    }
 
     public void addPalace(Palace plToAdd){
         // Add palace to ArrayList of Palaces

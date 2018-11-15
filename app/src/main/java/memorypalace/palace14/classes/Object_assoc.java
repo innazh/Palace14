@@ -6,7 +6,8 @@ public class Object_assoc {
     private String o_name;
     private String o_desc;
     private String o_symbol;
-    //Bitmap o_img;
+    private int o_Xcoordinate;
+    private int o_Ycoordinate;
 
     public Object_assoc(String name, String desc, String symbol){
         this.o_name=name;
