@@ -1,7 +1,9 @@
 package memorypalace.palace14;
 
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,6 +14,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.DragEvent;
@@ -59,10 +62,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                     return true;
                 case R.id.navigation_delete_palace:
                     mTextMessage.setText(R.string.delete_palace);
-                    System.out.println(listOfMyPalaces + "       " + palacePosition);
-                    listOfMyPalaces.deletePalace(palacePosition, getApplicationContext());
-                    finish();
-                    startActivity(new Intent(MyPalaceDetail.this, ViewPalaceList.class));
+                    showDialog(1);
                     return true;
             }
             return false;
@@ -269,6 +269,32 @@ public class MyPalaceDetail extends AppCompatActivity {
         palacePosition = bundle.getInt("position");
         //Get position of the palace clicked on the list
         palaceClicked = listOfMyPalaces.getPalace(palacePosition);
+
+    }
+
+    // creates Dialogs for this Activity
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        final Dialog dialog;
+        dialog = new AlertDialog.Builder(this).setMessage(
+                "Are you sure you want to delete " + listOfMyPalaces.getPalace(palacePosition).getName() + " ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                System.out.println(listOfMyPalaces + "       " + palacePosition);
+                                listOfMyPalaces.deletePalace(palacePosition, getApplicationContext());
+                                finish();
+                                startActivity(new Intent(MyPalaceDetail.this, ViewPalaceList.class));
+                            }
+                        })
+                .setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        }).create();
+        return dialog;
 
     }
 
