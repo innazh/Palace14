@@ -68,7 +68,7 @@ public class ViewPalaceList  extends AppCompatActivity {
                     bundle.putInt("position", position);
 
                     intent.putExtra("list", bundle);
-
+                    finish();
                     startActivity(intent);
                 }
             });

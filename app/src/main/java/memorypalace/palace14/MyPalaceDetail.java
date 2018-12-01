@@ -302,6 +302,8 @@ public class MyPalaceDetail extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();
+            Intent intent = new Intent(MyPalaceDetail.this, ViewPalaceList.class);
+            startActivity(intent);
         }
         return true;
     }
