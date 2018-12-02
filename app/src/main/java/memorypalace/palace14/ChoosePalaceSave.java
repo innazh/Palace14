@@ -77,8 +77,7 @@ public class ChoosePalaceSave extends AppCompatActivity {
                                         // Create a new palace with the Name and Image
                                         Palace myPalace = new Palace(userInput.getText().toString(),imageName);
                                         PalaceList palaces = new PalaceList();
-                                        //test
-                                        System.out.println(myPalace.getName());
+
                                         // Add palace to existing list of Palaces.
                                         palaces.createPalace(myPalace, getApplicationContext(), getFilesDir());
                                         finish();

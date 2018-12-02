@@ -24,10 +24,9 @@ public class PalaceList implements Serializable {
         }
 
     /*Creates a palace and adds it to the file and to the arrayList*/
-    public void createPalace(Palace plToAdd, Context context, File dir){
+    public void createPalace(Palace plToAdd, Context context, File dir) {
         File f;
-        ObjectOutputStream objOutStream = null;
-        FileOutputStream fos = null;
+
         try {
             f = new File(dir + File.separator + "palaces.tmp");
 
@@ -36,34 +35,16 @@ public class PalaceList implements Serializable {
                 readPalacesFile(f);
             }
 
-            //Initialize FileOutPutStream to the file "palaces.tmp" & private access internal data storage.
-            fos = context.openFileOutput("palaces.tmp", MODE_PRIVATE);
             this.addPalace(plToAdd);
-            //Initialize object output stream.
-            objOutStream = new ObjectOutputStream(fos);
-
-            //Writes an array list to a file
-            objOutStream.writeObject(this.myPalaces);
+            writePalacesFile(context);
 
             //Output the path where the file was saved
             Toast.makeText(context, "Saved to " + context.getFilesDir() + "/" + "palaces.tmp", Toast.LENGTH_LONG).show();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("File's not found");
+
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Couldn't create object stream");
-        } finally {
-            if (fos != null) {
-                try {
-                    // Close the Object and File Streams
-                    objOutStream.close();
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -73,15 +54,9 @@ public class PalaceList implements Serializable {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(_f));
 
         try {
-            //Object obj = null;
-            //While it's possible to read from the file:
-            // Read a Palace object from a file, print it out and add it to the list of created palaces
-            //try {
-                //while ((
-             this.myPalaces = (ArrayList<Palace>) in.readObject();;//) != null) {
-             //list.addPalace(palaceListRead);
-               // }
-            //} catch(EOFException e) {
+
+             this.myPalaces = (ArrayList<Palace>) in.readObject();
+
              in.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -95,11 +70,30 @@ public class PalaceList implements Serializable {
         } finally { in.close(); }
     }
 
+    /*Rename the function in a meaningful way*/
+//    public void re_SavePalaceListToFileBecauseItsStateIsNowChanged(Context context){
+//        writePalacesFile(context);
+//    }
+    public void writePalacesFile(Context context){
+        ObjectOutputStream objOutStream = null;
+        FileOutputStream fos = null;
+
+        try {
+            //Initialize FileOutPutStream to the file "palaces.tmp" & private access internal data storage.
+            fos = context.openFileOutput("palaces.tmp", MODE_PRIVATE);
+            //Initialize object output stream.
+            objOutStream = new ObjectOutputStream(fos);
+            //Writes an array list to a file
+            objOutStream.writeObject(this.myPalaces);
+        }
+        catch (IOException e) {}
+
+    }
+
     public boolean deletePalace(int position, Context context){
         // Remove the palace at position from the arrayList of Palaces
         boolean res=true;
-        ObjectOutputStream objOutStream = null;
-        FileOutputStream fos = null;
+
         String deletedPalaceName;
 
         if(!this.myPalaces.isEmpty()) {
@@ -107,16 +101,8 @@ public class PalaceList implements Serializable {
             this.myPalaces.remove(position);
 
             //Now we need to rewrite the file.
-            //Initialize FileOutPutStream to the file "palaces.tmp" & private access internal data storage.
-            try {
-                fos = context.openFileOutput("palaces.tmp", MODE_PRIVATE);
-                //Initialize object output stream.
-                objOutStream = new ObjectOutputStream(fos);
-                //Writes an array list to a file
-                objOutStream.writeObject(this.myPalaces);
-            } catch (IOException e) {
-                System.out.println("IOException in deletePalace inside the PalaceList class");
-            }
+            writePalacesFile(context);
+
             //Output the path where the file was saved
             Toast.makeText(context, "Palace " + deletedPalaceName + " was successfully deleted", Toast.LENGTH_LONG).show();
         }

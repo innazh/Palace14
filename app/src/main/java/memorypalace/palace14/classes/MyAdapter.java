@@ -1,6 +1,5 @@
 package memorypalace.palace14.classes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +65,7 @@ public class MyAdapter extends BaseAdapter         //has a class viewholder whic
         // here setting up names and images
         viewHolder.textName.setText(palacesList.get(position).getName()); //+""
 
-        String imageName = palacesList.get(position).getImagePath();
+        String imageName = palacesList.get(position).getImageName();
 
         switch(imageName){
             case "one":
