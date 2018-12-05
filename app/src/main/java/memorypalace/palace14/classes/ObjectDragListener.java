@@ -59,6 +59,14 @@ public class ObjectDragListener implements View.OnDragListener {
 //                  The problem is: I don't know how to properly return the result from the onClick function
 //                  because it runs 'asynchroniously'(?) and right now returns the result to me only after my dragging and dropping is completely over
 //                  so that I can't reset anything based on the result*/
+
+                /*
+                    Correction YOU CANNOT RETURN THE RESULT FROM ONCLICk
+                    So therefore, that means we need to code this in such a way that we do not use the
+                    return value of the onclick.
+                 */
+
+
 //                System.out.println("RESULT BEFORE IF: = " + result);
 //                if(result) {
 //                    System.out.println("RESULT TRUE");

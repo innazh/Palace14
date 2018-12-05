@@ -106,6 +106,19 @@ public class MyPalaceDetail extends AppCompatActivity {
         myPalaceDetailImg.setImageResource(resImgID);
     }
 
+    private boolean doOnTrueResult(){
+
+        return true;
+    }
+
+    private boolean doOnFalseResult(){
+
+        // Set Object coordinates here???
+
+
+        return true;
+    }
+
     // creates Dialogs for this Activity
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -120,12 +133,15 @@ public class MyPalaceDetail extends AppCompatActivity {
                                 listOfMyPalaces.deletePalace(palacePosition, getApplicationContext());
                                 finish();
                                 startActivity(new Intent(MyPalaceDetail.this, ViewPalaceList.class));
+                                doOnTrueResult();
                             }
+
                         })
                 .setNegativeButton("No",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
+                                doOnFalseResult();
                             }
                         }).create();
         return dialog;
