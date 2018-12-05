@@ -13,6 +13,10 @@ public class ObjectDragListener implements View.OnDragListener {
     private Context context;
     private Palace palace;
     private boolean globalRes;
+    public View dragView;
+    public float initialX;
+    public float initialY;
+
     /*The whole idea of having a result is being able to cancel dragging and dropping depending on the result.
     * If the user pressed cancel then the object is supposed to be returned to its initial spot.
     * If "save" is pressed then the system creates new Object_assoc object and adds it to the list of objects in the Palace.*/
@@ -27,9 +31,9 @@ public class ObjectDragListener implements View.OnDragListener {
     public boolean onDrag(View v, DragEvent event) {
         boolean ondragres=false;
         int action = event.getAction();
-        View dragView = (View) event.getLocalState();
-        float initialX = dragView.getX();
-        float initialY = dragView.getY();
+        dragView = (View) event.getLocalState();
+        initialX = dragView.getX(); // PLEASE REMIND ME IF JAVA IS SUPER-ANAL ABOUT USING this. BEFORE MEMBER VARIABLES.
+        initialY = dragView.getY();
         System.out.println("INIT_X: " + initialX);
         System.out.println("INIT_Y: " + initialY);
 
