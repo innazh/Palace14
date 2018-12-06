@@ -18,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class MyPalaceDetail extends AppCompatActivity {
     private ImageView myPalaceDetailImg; //ImageView for Palace Img
     private ImageView objStool, objBarStool, objDinningSet, objBookshelf; //ImageViews for objects
     private int palacePosition;
+    private Button homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,14 @@ public class MyPalaceDetail extends AppCompatActivity {
         init();
         //Sets up all the dragging and dropping functionality
         initDraggingListening();
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MyPalaceDetail.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -56,6 +66,11 @@ public class MyPalaceDetail extends AppCompatActivity {
             }
         }
         catch (RuntimeException e){}
+
+        /*if (lol.getGlobalRes() && lol.objectRet() != null) {
+            //palaceClicked.addObject(lol.objectRet());
+            System.out.println("WILL THIS EVER HAPPEN?");
+        }*/
     }
 
     private boolean dropEventNotHandled(DragEvent dragEvent) {
@@ -63,7 +78,7 @@ public class MyPalaceDetail extends AppCompatActivity {
     }
 
     public void initDraggingListening(){
-        lol = new ObjectDragListener(this, palaceClicked);
+        lol = new ObjectDragListener(this, palaceClicked,listOfMyPalaces);
         //Sets the target for the dropping action
         findViewById(R.id.myPalaceImg).setOnDragListener(lol);
         // Assign Tags to objects for creation of ClipData Objects.
@@ -86,6 +101,11 @@ public class MyPalaceDetail extends AppCompatActivity {
         objBarStool = findViewById(R.id.objectBarstool);
         objDinningSet = findViewById(R.id.objectDiningset);
         objBookshelf = findViewById(R.id.objectBookShelf);
+        homeButton = findViewById(R.id.home);
+        objStool.setTag("stool.png");
+        objBarStool.setTag("barstool.png");
+        objBookshelf.setTag("bookcase.png");
+        objDinningSet.setTag("diningset.png");
 
         mTextMessage = (TextView) findViewById(R.id.message);
 
@@ -104,6 +124,8 @@ public class MyPalaceDetail extends AppCompatActivity {
         //Display the right blueprint on the screen
         int resImgID = getResources().getIdentifier(palaceClicked.getImageName(), "drawable", getPackageName());
         myPalaceDetailImg.setImageResource(resImgID);
+
+        System.out.println("number of objects: " + palaceClicked.getListLength());
 
         // Set the coordinates of any moved Objects
         if(palaceClicked.getListLength() > 0){
@@ -191,6 +213,7 @@ public class MyPalaceDetail extends AppCompatActivity {
             finish();
             Intent intent = new Intent(MyPalaceDetail.this, ViewPalaceList.class);
             startActivity(intent);
+
         }
         return true;
     }

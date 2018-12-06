@@ -1,6 +1,7 @@
 package memorypalace.palace14.classes;
+import java.io.Serializable;
 
-public class Object_assoc {
+public class Object_assoc implements Serializable {
     private String o_name;
     private String o_desc;
     private String o_imgName; //ImageName

@@ -12,6 +12,7 @@ import memorypalace.palace14.R;
 public class ObjectDragListener implements View.OnDragListener {
     private Context context;
     private Palace palace;
+    private PalaceList palaces;
     private boolean globalRes;
     public View dragView;
     public String viewTag;
@@ -19,20 +20,22 @@ public class ObjectDragListener implements View.OnDragListener {
     public float initialY;
     public float draggedX;
     public float draggedY;
+    public Object_assoc modObject = null;
 
     /*The whole idea of having a result is being able to cancel dragging and dropping depending on the result.
     * If the user pressed cancel then the object is supposed to be returned to its initial spot.
     * If "save" is pressed then the system creates new Object_assoc object and adds it to the list of objects in the Palace.*/
     //boolean result;
 
-    public ObjectDragListener(Context context, Palace palace){
+    public ObjectDragListener(Context context, Palace palace, PalaceList plcs){
         this.context=context;
         this.palace=palace;
+        this.palaces=plcs;
     }
 
     @Override
     public boolean onDrag(View v, DragEvent event) {
-        boolean ondragres=false;
+
         int action = event.getAction();
         dragView = (View) event.getLocalState();
         System.out.println("INIT_X: " + initialX);
@@ -41,7 +44,7 @@ public class ObjectDragListener implements View.OnDragListener {
 
         switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
-                initialX = dragView.getX(); // PLEASE REMIND ME IF JAVA IS SUPER-ANAL ABOUT USING this. BEFORE MEMBER VARIABLES.
+                initialX = dragView.getX();
                 initialY = dragView.getY();
 
                 // Get the tag of the view being dragged
@@ -67,7 +70,7 @@ public class ObjectDragListener implements View.OnDragListener {
                 draggedY = y;
 
 
-                ondragres = callAddObjectDialog(this.context, x, y, view.getTag().toString());
+                callAddObjectDialog(this.context, x, y, view.getTag().toString());
 
             case DragEvent.ACTION_DRAG_ENDED:
                 System.out.println("ACTION_DRAG_EXITED: PIZDETS");
@@ -95,8 +98,9 @@ public class ObjectDragListener implements View.OnDragListener {
       */
     public void saveObject(){
         // Sets and saves the Object (Kind of redundant tbh)
-        dragView.setX(draggedX);
-        dragView.setY(draggedY);
+        //dragView.setX(draggedX);
+        //dragView.setY(draggedY);
+        globalRes = true;
     }
 
     /*
@@ -118,7 +122,7 @@ public class ObjectDragListener implements View.OnDragListener {
 
 
 
-    private boolean callAddObjectDialog(Context context, final float x, final float y, final String imgName)
+    private boolean callAddObjectDialog(final Context context, final float x, final float y, final String imgName)
     {
         System.out.println("OBJECT DIALOG IS CALLED");
 
@@ -143,23 +147,33 @@ public class ObjectDragListener implements View.OnDragListener {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                globalRes = true;
                 System.out.println("SAVE THE OBJECT");
                 // Add the object with its name, description and final x and y after dropped coordinates
                 palace.addObject(new Object_assoc(objName.getText().toString(),objDesc.getText().toString(), viewTag,imgName ,draggedX, draggedY));
                 saveObject();
+                modObject = new Object_assoc(objName.getText().toString(),objDesc.getText().toString(), viewTag,imgName ,draggedX, draggedY);
                 myDialog.cancel();
                 result[0] = true;
+                // For loop to check for added objects.
+                for(int i = 0; i < palace.getListLength(); i++){
+                    System.out.println("E1 Object Name: " + palace.getObject(i).getName());
+                    System.out.println("E1 Object Desc: " + palace.getObject(i).getDesc());
+                    System.out.println("E1 Object x: " + palace.getObject(i).getO_Xcoordinate());
+                    System.out.println("E1 Object y: " + palace.getObject(i).getO_Ycoordinate());
+                }
+
+                // Does this overwrite all the palaces inside it?
+                //palaces.writePalacesFile(context);
+
 
             }
         });
 
-        // CANCELS SAVING THE BLOODY OBJECT
+
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //doOnFalseResult();
-                System.out.println("DOESITBLOODYWORKORNOT");
                 resetObject();
                 myDialog.cancel();
                 result[0] = false;
@@ -171,5 +185,9 @@ public class ObjectDragListener implements View.OnDragListener {
 
     public boolean getGlobalRes(){
         return globalRes;
+    }
+
+    public Object_assoc objectRet(){
+        return modObject;
     }
 }
