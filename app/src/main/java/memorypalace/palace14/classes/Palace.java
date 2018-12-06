@@ -33,6 +33,8 @@ public class Palace implements Serializable {
     }
 
     //Getters
+    public int getListLength() { return this.objectList.size(); }
+
     public String getName(){
         return this.name;
     }
@@ -43,43 +45,7 @@ public class Palace implements Serializable {
 
     public Object_assoc getObject(int indx) { return this.objectList.get(indx); }
 
-    public void readObjectsFile(File _f){
 
-        ObjectInputStream in;
-        try {
-            in = new ObjectInputStream(new FileInputStream(_f));
-
-            this.objectList = (ArrayList<Object_assoc>) in.readObject();
-
-            in.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("MyPalaceDetail: File is not found");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("MyPalaceDetail: IOE");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("MyPalaceDetail: Class not found exception");
-        } finally { in.close(); } // ERROR IN THE BLOODY FILE
-
-    }
-
-    public void writePalacesFile(Context context){
-        ObjectOutputStream objOutStream = null;
-        FileOutputStream fos = null;
-
-        try {
-            //Initialize FileOutPutStream to the file "palaces.tmp" & private access internal data storage.
-            fos = context.openFileOutput("objects.tmp", MODE_PRIVATE);
-            //Initialize object output stream.
-            objOutStream = new ObjectOutputStream(fos);
-            //Writes an array list to a file
-            objOutStream.writeObject(this.objectList);
-        }
-        catch (IOException e) {}
-
-    }
 
     @Override
     public String toString() {

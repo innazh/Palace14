@@ -54,6 +54,7 @@
 
         <ImageView
             android:id="@+id/objectStool"
+            android:tag="@string/objectstool"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
@@ -62,6 +63,7 @@
 
         <ImageView
             android:id="@+id/objectBookShelf"
+            android:tag="@string/objectbookshelf"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
@@ -71,6 +73,7 @@
 
         <ImageView
             android:id="@+id/objectBarstool"
+            android:tag="@string/objectbarstool"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
@@ -80,6 +83,7 @@
 
         <ImageView
             android:id="@+id/objectDiningset"
+            android:tag="@string/objectdiningset"
             android:layout_width="50dp"
             android:layout_height="100px"
             android:layout_margin="8dp"

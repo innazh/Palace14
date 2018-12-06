@@ -104,8 +104,29 @@ public class MyPalaceDetail extends AppCompatActivity {
         //Display the right blueprint on the screen
         int resImgID = getResources().getIdentifier(palaceClicked.getImageName(), "drawable", getPackageName());
         myPalaceDetailImg.setImageResource(resImgID);
+
+        // Set the coordinates of any moved Objects
+        if(palaceClicked.getListLength() > 0){
+
+            // I know its inefficient af
+            for(int i = 0; i < palaceClicked.getListLength(); i++){
+                if(palaceClicked.getObject(i).getView_tag() == objStool.getTag().toString() )
+                           changeLocation(objStool,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
+                if(palaceClicked.getObject(i).getView_tag() == objBarStool.getTag().toString() )
+                    changeLocation(objStool,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
+                if(palaceClicked.getObject(i).getView_tag() == objDinningSet.getTag().toString() )
+                    changeLocation(objStool,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
+                if(palaceClicked.getObject(i).getView_tag() == objBookshelf.getTag().toString() )
+                    changeLocation(objStool,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
+            }
+
+        }
     }
 
+    protected void changeLocation(View locToChange, float x, float y){
+        locToChange.setX(x);
+        locToChange.setY(y);
+    }
 
     // creates Dialogs for this Activity
     @Override

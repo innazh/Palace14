@@ -4,20 +4,21 @@ public class Object_assoc {
     private String o_name;
     private String o_desc;
     private String o_imgName; //ImageName
-    private String view_id;
+    private String view_tag;
     boolean hasChanged;
     private float o_Xcoordinate;
     private float o_Ycoordinate;
 
-    public Object_assoc(String name, String desc, String imgName, float x, float y){
+    public Object_assoc(String name, String desc, String imgName, String viewTag, float x, float y){
         this.o_name=name;
         this.o_desc=desc;
         this.o_imgName =imgName;
+        this.view_tag=viewTag;
         this.o_Xcoordinate=x;
         this.o_Ycoordinate=y;
     }
 
-    public String getView_id(){ return this.view_id;}
+    public String getView_tag(){ return this.view_tag;}
     //Getters
     public String getName(){
         return this.o_name;

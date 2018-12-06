@@ -14,6 +14,7 @@ public class ObjectDragListener implements View.OnDragListener {
     private Palace palace;
     private boolean globalRes;
     public View dragView;
+    public String viewTag;
     public float initialX;
     public float initialY;
     public float draggedX;
@@ -34,7 +35,6 @@ public class ObjectDragListener implements View.OnDragListener {
         boolean ondragres=false;
         int action = event.getAction();
         dragView = (View) event.getLocalState();
-
         System.out.println("INIT_X: " + initialX);
         System.out.println("INIT_Y: " + initialY);
 
@@ -43,6 +43,10 @@ public class ObjectDragListener implements View.OnDragListener {
             case DragEvent.ACTION_DRAG_STARTED:
                 initialX = dragView.getX(); // PLEASE REMIND ME IF JAVA IS SUPER-ANAL ABOUT USING this. BEFORE MEMBER VARIABLES.
                 initialY = dragView.getY();
+
+                // Get the tag of the view being dragged
+                viewTag = dragView.getTag().toString();
+
                 break;
 
             case DragEvent.ACTION_DRAG_ENTERED:
@@ -64,28 +68,7 @@ public class ObjectDragListener implements View.OnDragListener {
 
 
                 ondragres = callAddObjectDialog(this.context, x, y, view.getTag().toString());
-//                /*Still a bit buggy.
-//                  The problem is: I don't know how to properly return the result from the onClick function
-//                  because it runs 'asynchroniously'(?) and right now returns the result to me only after my dragging and dropping is completely over
-//                  so that I can't reset anything based on the result*/
 
-                /*
-                    Correction YOU CANNOT RETURN THE RESULT FROM ONCLICk
-                    So therefore, that means we need to code this in such a way that we do not use the
-                    return value of the onclick.
-                 */
-
-
-//                System.out.println("RESULT BEFORE IF: = " + result);
-//                if(result) {
-//                    System.out.println("RESULT TRUE");
-//                }
-//                else{
-//                    System.out.println("RESULT FALSE");
-//                    dragView.setX(initialX);
-//                    dragView.setY(initialY);
-//                }
-//                //////////////////////////////////////////////////////////////////////////////////////////////////
             case DragEvent.ACTION_DRAG_ENDED:
                 System.out.println("ACTION_DRAG_EXITED: PIZDETS");
 
@@ -121,9 +104,6 @@ public class ObjectDragListener implements View.OnDragListener {
      */
     public void resetObject(){
         // Reset the object coordinates
-
-        System.out.println("HUYAK CANCEL NOT WORK");
-
         System.out.println("blah Current X: " +dragView.getX());
         System.out.println("blah Current Y: "+dragView.getY());
 
@@ -154,7 +134,6 @@ public class ObjectDragListener implements View.OnDragListener {
         objName=myDialog.findViewById(R.id.objectNameInput);
         objDesc=myDialog.findViewById(R.id.objectDescInput);
         saveBtn=myDialog.findViewById(R.id.saveBtnObjInpt);
-        //cancelBtnObjInpt
         cancelBtn=myDialog.findViewById(R.id.cancelBtnObjInpt);
 
         myDialog.show();
@@ -166,7 +145,8 @@ public class ObjectDragListener implements View.OnDragListener {
             public void onClick(View v) {
 
                 System.out.println("SAVE THE OBJECT");
-                palace.addObject(new Object_assoc(objName.getText().toString(),objDesc.getText().toString(),imgName ,x, y));
+                // Add the object with its name, description and final x and y after dropped coordinates
+                palace.addObject(new Object_assoc(objName.getText().toString(),objDesc.getText().toString(), viewTag,imgName ,draggedX, draggedY));
                 saveObject();
                 myDialog.cancel();
                 result[0] = true;
