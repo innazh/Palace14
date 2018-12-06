@@ -34,14 +34,15 @@ public class ObjectDragListener implements View.OnDragListener {
         boolean ondragres=false;
         int action = event.getAction();
         dragView = (View) event.getLocalState();
-        initialX = dragView.getX(); // PLEASE REMIND ME IF JAVA IS SUPER-ANAL ABOUT USING this. BEFORE MEMBER VARIABLES.
-        initialY = dragView.getY();
+
         System.out.println("INIT_X: " + initialX);
         System.out.println("INIT_Y: " + initialY);
 
 
         switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
+                initialX = dragView.getX(); // PLEASE REMIND ME IF JAVA IS SUPER-ANAL ABOUT USING this. BEFORE MEMBER VARIABLES.
+                initialY = dragView.getY();
                 break;
 
             case DragEvent.ACTION_DRAG_ENTERED:
@@ -63,7 +64,6 @@ public class ObjectDragListener implements View.OnDragListener {
 
 
                 ondragres = callAddObjectDialog(this.context, x, y, view.getTag().toString());
-                System.out.println("PROXIMOsenor");
 //                /*Still a bit buggy.
 //                  The problem is: I don't know how to properly return the result from the onClick function
 //                  because it runs 'asynchroniously'(?) and right now returns the result to me only after my dragging and dropping is completely over
@@ -123,8 +123,17 @@ public class ObjectDragListener implements View.OnDragListener {
         // Reset the object coordinates
 
         System.out.println("HUYAK CANCEL NOT WORK");
+
+        System.out.println("blah Current X: " +dragView.getX());
+        System.out.println("blah Current Y: "+dragView.getY());
+
         dragView.setX(initialX);
         dragView.setY(initialY);
+        System.out.println("blah Reset Initial X: "+initialX);
+        System.out.println("blah Reset Initial Y: "+initialY);
+        System.out.println("blah Dragged Object X: " +dragView.getX());
+        System.out.println("blah Dragged Object Y: " +dragView.getY());
+
     }
 
 
