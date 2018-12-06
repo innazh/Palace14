@@ -36,7 +36,7 @@ public class MyPalaceDetail extends AppCompatActivity {
     private ImageView myPalaceDetailImg; //ImageView for Palace Img
     private ImageView objStool, objBarStool, objDinningSet, objBookshelf; //ImageViews for objects
     private int palacePosition;
-    private Button homeButton;
+    //private Button homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,12 @@ public class MyPalaceDetail extends AppCompatActivity {
         //Sets up all the dragging and dropping functionality
         initDraggingListening();
 
-        homeButton.setOnClickListener(new View.OnClickListener() {
+      /*  homeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MyPalaceDetail.this, MainActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 
@@ -101,7 +101,7 @@ public class MyPalaceDetail extends AppCompatActivity {
         objBarStool = findViewById(R.id.objectBarstool);
         objDinningSet = findViewById(R.id.objectDiningset);
         objBookshelf = findViewById(R.id.objectBookShelf);
-        homeButton = findViewById(R.id.home);
+
         objStool.setTag("stool.png");
         objBarStool.setTag("barstool.png");
         objBookshelf.setTag("bookcase.png");
