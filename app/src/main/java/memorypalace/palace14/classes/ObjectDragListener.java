@@ -111,7 +111,7 @@ public class ObjectDragListener implements View.OnDragListener {
      Function for saving object with its coordinates, name and description
       */
     public void saveObject(){
-        // Sets and saves the Object
+        // Sets and saves the Object (Kind of redundant tbh)
         dragView.setX(draggedX);
         dragView.setY(draggedY);
     }

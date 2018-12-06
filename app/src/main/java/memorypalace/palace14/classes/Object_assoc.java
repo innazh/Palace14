@@ -4,6 +4,8 @@ public class Object_assoc {
     private String o_name;
     private String o_desc;
     private String o_imgName; //ImageName
+    private String view_id;
+    boolean hasChanged;
     private float o_Xcoordinate;
     private float o_Ycoordinate;
 
@@ -15,6 +17,7 @@ public class Object_assoc {
         this.o_Ycoordinate=y;
     }
 
+    public String getView_id(){ return this.view_id;}
     //Getters
     public String getName(){
         return this.o_name;
