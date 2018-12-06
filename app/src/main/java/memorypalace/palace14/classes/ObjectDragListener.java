@@ -16,6 +16,8 @@ public class ObjectDragListener implements View.OnDragListener {
     public View dragView;
     public float initialX;
     public float initialY;
+    public float draggedX;
+    public float draggedY;
 
     /*The whole idea of having a result is being able to cancel dragging and dropping depending on the result.
     * If the user pressed cancel then the object is supposed to be returned to its initial spot.
@@ -56,9 +58,12 @@ public class ObjectDragListener implements View.OnDragListener {
                 /*Here, I want to try to get mouse coordinates later (idk maybe its stupid idea and i shouldnt*/
                 dragView.setX(x+dragView.getWidth());// -(view.getWidth()/2));
                 dragView.setY(y);
+                draggedX = (x+dragView.getWidth());
+                draggedY = y;
+
 
                 ondragres = callAddObjectDialog(this.context, x, y, view.getTag().toString());
-
+                System.out.println("PROXIMOsenor");
 //                /*Still a bit buggy.
 //                  The problem is: I don't know how to properly return the result from the onClick function
 //                  because it runs 'asynchroniously'(?) and right now returns the result to me only after my dragging and dropping is completely over
@@ -102,8 +107,32 @@ public class ObjectDragListener implements View.OnDragListener {
         return true;
     }
 
+    /*
+     Function for saving object with its coordinates, name and description
+      */
+    public void saveObject(){
+        // Sets and saves the Object
+        dragView.setX(draggedX);
+        dragView.setY(draggedY);
+    }
+
+    /*
+    Function for resetting the object, to its starting coordinates
+     */
+    public void resetObject(){
+        // Reset the object coordinates
+
+        System.out.println("HUYAK CANCEL NOT WORK");
+        dragView.setX(initialX);
+        dragView.setY(initialY);
+    }
+
+
+
     private boolean callAddObjectDialog(Context context, final float x, final float y, final String imgName)
     {
+        System.out.println("OBJECT DIALOG IS CALLED");
+
         final EditText objName, objDesc;
         Button saveBtn, cancelBtn;
         final Dialog myDialog;
@@ -116,26 +145,33 @@ public class ObjectDragListener implements View.OnDragListener {
         objName=myDialog.findViewById(R.id.objectNameInput);
         objDesc=myDialog.findViewById(R.id.objectDescInput);
         saveBtn=myDialog.findViewById(R.id.saveBtnObjInpt);
+        //cancelBtnObjInpt
         cancelBtn=myDialog.findViewById(R.id.cancelBtnObjInpt);
 
         myDialog.show();
 
+
+        // SAVES THE BLOODY OBJECT
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                System.out.println("SAVE THE OBJECT");
                 palace.addObject(new Object_assoc(objName.getText().toString(),objDesc.getText().toString(),imgName ,x, y));
-                //doOnTrueResult();
+                saveObject();
                 myDialog.cancel();
                 result[0] = true;
 
             }
         });
 
+        // CANCELS SAVING THE BLOODY OBJECT
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //doOnFalseResult();
+                System.out.println("DOESITBLOODYWORKORNOT");
+                resetObject();
                 myDialog.cancel();
                 result[0] = false;
             }

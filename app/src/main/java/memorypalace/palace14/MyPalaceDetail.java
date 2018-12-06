@@ -106,19 +106,6 @@ public class MyPalaceDetail extends AppCompatActivity {
         myPalaceDetailImg.setImageResource(resImgID);
     }
 
-    /*
-    Function for saving object with its coordinates, name and description
-     */
-    protected void saveObject(){
-
-    }
-
-    /*
-    Function for resetting the object, to its starting coordinates
-     */
-    protected void resetObject(){
-
-    }
 
     // creates Dialogs for this Activity
     @Override

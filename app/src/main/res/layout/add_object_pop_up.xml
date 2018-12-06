@@ -34,20 +34,18 @@
         android:hint="Description"
         android:inputType="textImeMultiLine" />
 
-    <LinearLayout
+
+    <Button
+        android:id="@+id/saveBtnObjInpt"
+        android:text="Save"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/saveBtnObjInpt"
-            android:text="Save"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-        <Button
+
+    <Button
             android:id="@+id/cancelBtnObjInpt"
             android:text="Cancel"
             android:layout_marginRight="40dp"
@@ -55,5 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </LinearLayout>
+
+
+
 </LinearLayout>
