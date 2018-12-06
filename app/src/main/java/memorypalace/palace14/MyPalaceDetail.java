@@ -22,6 +22,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import memorypalace.palace14.classes.ObjectDragListener;
 import memorypalace.palace14.classes.ObjectTouchListener;
 import memorypalace.palace14.classes.Palace;
@@ -54,7 +57,6 @@ public class MyPalaceDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
-
     }
 
     @Override
@@ -63,6 +65,7 @@ public class MyPalaceDetail extends AppCompatActivity {
         try {
             if (lol.getGlobalRes()) {
                 this.listOfMyPalaces.writePalacesFile(this);
+                lol.setGlobalRes(false);
             }
         }
         catch (RuntimeException e){}
@@ -92,6 +95,15 @@ public class MyPalaceDetail extends AppCompatActivity {
         objBarStool.setOnTouchListener(new ObjectTouchListener());
         objBookshelf.setOnTouchListener(new ObjectTouchListener());
         objDinningSet.setOnTouchListener(new ObjectTouchListener());
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if(lol.getGlobalRes()){
+                    listOfMyPalaces.writePalacesFile(getApplicationContext());
+                }
+            }
+        }, 0, 1000);//put here time 1000 milliseconds=1 second
     }
 
     public void init(){
@@ -132,14 +144,14 @@ public class MyPalaceDetail extends AppCompatActivity {
 
             // I know its inefficient af
             for(int i = 0; i < palaceClicked.getListLength(); i++){
-                if(palaceClicked.getObject(i).getView_tag() == objStool.getTag().toString() )
+                if(palaceClicked.getObject(i).getView_tag().compareTo(objStool.getTag().toString() )==0)
                            changeLocation(objStool,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
-                if(palaceClicked.getObject(i).getView_tag() == objBarStool.getTag().toString() )
-                    changeLocation(objStool,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
-                if(palaceClicked.getObject(i).getView_tag() == objDinningSet.getTag().toString() )
-                    changeLocation(objStool,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
-                if(palaceClicked.getObject(i).getView_tag() == objBookshelf.getTag().toString() )
-                    changeLocation(objStool,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
+                if(palaceClicked.getObject(i).getView_tag().compareTo(objBarStool.getTag().toString())==0 )
+                    changeLocation(objBarStool,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
+                if(palaceClicked.getObject(i).getView_tag().compareTo(objDinningSet.getTag().toString() )==0)
+                    changeLocation(objDinningSet,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
+                if(palaceClicked.getObject(i).getView_tag().compareTo(objBookshelf.getTag().toString() )==0)
+                    changeLocation(objBookshelf,palaceClicked.getObject(i).getO_Xcoordinate(),palaceClicked.getObject(i).getO_Ycoordinate());
             }
 
         }

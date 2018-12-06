@@ -64,10 +64,12 @@ public class ObjectDragListener implements View.OnDragListener {
                 float y = event.getY();
 
                 /*Here, I want to try to get mouse coordinates later (idk maybe its stupid idea and i shouldnt*/
-                dragView.setX(x+dragView.getWidth());// -(view.getWidth()/2));
-                dragView.setY(y);
                 draggedX = (x+dragView.getWidth());
                 draggedY = y;
+//Last changes:
+                dragView.setX(draggedX);// -(view.getWidth()/2));
+                dragView.setY(draggedY);
+
 
 
                 callAddObjectDialog(this.context, x, y, view.getTag().toString());
@@ -152,7 +154,7 @@ public class ObjectDragListener implements View.OnDragListener {
                 // Add the object with its name, description and final x and y after dropped coordinates
                 palace.addObject(new Object_assoc(objName.getText().toString(),objDesc.getText().toString(), viewTag,imgName ,draggedX, draggedY));
                 saveObject();
-                modObject = new Object_assoc(objName.getText().toString(),objDesc.getText().toString(), viewTag,imgName ,draggedX, draggedY);
+                //modObject = new Object_assoc(objName.getText().toString(),objDesc.getText().toString(), viewTag,imgName ,draggedX, draggedY);
                 myDialog.cancel();
                 result[0] = true;
                 // For loop to check for added objects.
@@ -185,6 +187,10 @@ public class ObjectDragListener implements View.OnDragListener {
 
     public boolean getGlobalRes(){
         return globalRes;
+    }
+
+    public void setGlobalRes(boolean res){
+        globalRes=res;
     }
 
     public Object_assoc objectRet(){
