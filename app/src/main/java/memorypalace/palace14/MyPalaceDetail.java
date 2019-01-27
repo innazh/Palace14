@@ -142,10 +142,11 @@ public class MyPalaceDetail extends AppCompatActivity {
                         saveBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                //declared final for the img onclick
+                                final Object_assoc newObj;
 
-                                Object_assoc newObj;
                                 RelativeLayout myLayout = findViewById(R.id.relativeLayoutPalaceDetail);
-                                ImageView newObjImgView = new ImageView(MyPalaceDetail.this);
+                                final ImageView newObjImgView = new ImageView(MyPalaceDetail.this);
                                 newObjImgView.setElevation(7); //Why does it have to be 7? LOL
 
                                 switch (toolChoice) {
@@ -174,7 +175,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                                         break;
 
                                     default:
-                                        System.out.println("........................");
+                                        newObj = new Object_assoc("", "","", "", endX, endY);
                                         break;
                                 }
                                 //Set the new coordinates
@@ -184,17 +185,74 @@ public class MyPalaceDetail extends AppCompatActivity {
                                 newObjImgView.setLayoutParams(new RelativeLayout.LayoutParams((int) getResources().getDimension(R.dimen.imageview_obj_width), (int) getResources().getDimension(R.dimen.imageview_obj_height)));
                                 myLayout.addView(newObjImgView);
 
+                                /*This code is needed for the following case:
+                                We're looking at the blueprint and decide to add and object.
+                                After we've added the object, we want to modify it without exiting the palace view*/
+
+                                newObjImgView.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        final Dialog myDialog;
+
+                                        myDialog = new Dialog(MyPalaceDetail.this);
+
+                                        myDialog.setContentView(R.layout.view_existing_obj_pop_up);
+                                        myDialog.setCancelable(false);
+
+                                        //Get all the fields from the XML file
+                                        final EditText clickedObjName=myDialog.findViewById(R.id.clickedObjName);
+                                        final EditText clickedObjDesc=myDialog.findViewById(R.id.clickedObjDesc);
+                                        Button clickedsaveBtn=myDialog.findViewById(R.id.editClickedObjSave);
+                                        Button clickedcancelBtn=myDialog.findViewById(R.id.editClickedObjCancel);
+                                        Button clickeddeleteBtn=myDialog.findViewById(R.id.clickedObjDeleteUnique);
+
+                                        //Set the data fields
+                                        clickedObjName.setText(objName.getText().toString());
+                                        clickedObjDesc.setText(objDesc.getText().toString());
+
+                                        myDialog.show();
+
+                                        clickedsaveBtn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                //Change the object's data to the data in the XML data fields
+                                                newObj.setO_name(clickedObjName.getText().toString());
+                                                newObj.setO_desc(clickedObjDesc.getText().toString());
+                                                //Save objects to the file.
+                                                listOfMyPalaces.writePalacesFile(MyPalaceDetail.this);
+                                                myDialog.cancel();
+                                            }
+                                        });
+
+                                        clickedcancelBtn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                myDialog.cancel();
+                                            }
+                                        });
+
+                                        clickeddeleteBtn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                int pos = palaceClicked.findObject(newObj);
+                                                palaceClicked.removeObject(pos);
+                                                listOfMyPalaces.writePalacesFile(MyPalaceDetail.this);
+
+                                                //Remove the current picture
+                                                //Note*: Can we 'remove' the imageView from the layout?
+                                                newObjImgView.setVisibility(View.GONE);
+
+                                                myDialog.cancel();
+                                            }
+                                        });
+                                    }
+                                });
+                                /////////////////////////////////////////////////////////////////////////////////////////////////
+
                                 //Write objects to the file
                                 listOfMyPalaces.writePalacesFile(MyPalaceDetail.this);
 
                                 myDialog.cancel();
-//                                // For loop to check for added objects.
-//                                for(int i = 0; i < palace.getListLength(); i++){
-//                                    System.out.println("E1 Object Name: " + palace.getObject(i).getName());
-//                                    System.out.println("E1 Object Desc: " + palace.getObject(i).getDesc());
-//                                    System.out.println("E1 Object x: " + palace.getObject(i).getO_Xcoordinate());
-//                                    System.out.println("E1 Object y: " + palace.getObject(i).getO_Ycoordinate());
-//                                }
                             }
                         });
 

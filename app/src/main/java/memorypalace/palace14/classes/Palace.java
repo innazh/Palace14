@@ -27,6 +27,23 @@ public class Palace implements Serializable {
         this.objectList = new ArrayList<Object_assoc>();
     }
 
+    public void removeObject(int position){
+        objectList.remove(position);
+    }
+
+    //Returns the position of the object on the objectList
+    public int findObject(Object_assoc obj){
+        int result=-1;
+
+        for(int i=0; i<getListLength() && result==-1;i++) {
+            if(this.objectList.get(i).getName().compareTo(obj.getName())==0){
+                result = i;
+            }
+        }
+
+        return result;
+    }
+
     //Setters
     public void addObject(Object_assoc object){
         objectList.add(object);
@@ -44,10 +61,6 @@ public class Palace implements Serializable {
     }
 
     public Object_assoc getObject(int indx) { return this.objectList.get(indx); }
-
-    public void removeObject(int position){
-        objectList.remove(position);
-    }
 
     @Override
     public String toString() {

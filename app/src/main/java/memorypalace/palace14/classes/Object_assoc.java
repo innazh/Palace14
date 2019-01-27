@@ -32,6 +32,16 @@ public class Object_assoc implements Serializable {
         this.o_Ycoordinate=y;
     }
 
+    //Copy constructor
+    public Object_assoc(Object_assoc obj){
+        this.o_name = obj.o_name;
+        this.o_desc = obj.o_desc;
+        this.o_imgName = obj.o_imgName;
+        this.view_tag = obj.view_tag;
+        this.o_Xcoordinate = obj.o_Xcoordinate;
+        this.o_Ycoordinate = obj.o_Ycoordinate;
+    }
+
     public String getView_tag(){ return this.view_tag;}
     //Getters
     public String getName(){
