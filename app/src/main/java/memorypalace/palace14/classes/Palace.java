@@ -45,7 +45,9 @@ public class Palace implements Serializable {
 
     public Object_assoc getObject(int indx) { return this.objectList.get(indx); }
 
-
+    public void removeObject(int position){
+        objectList.remove(position);
+    }
 
     @Override
     public String toString() {

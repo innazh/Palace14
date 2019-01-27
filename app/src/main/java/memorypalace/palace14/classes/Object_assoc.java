@@ -7,8 +7,21 @@ public class Object_assoc implements Serializable {
     private String o_imgName; //ImageName
     private String view_tag;
     boolean hasChanged;
+    private float o_initXcoordinate;
+    private float o_initYcoordinate;
     private float o_Xcoordinate;
     private float o_Ycoordinate;
+
+    public Object_assoc(String name, String desc, String imgName, String viewTag, float x, float y, float initx, float inity){
+        this.o_name=name;
+        this.o_desc=desc;
+        this.o_imgName =imgName;
+        this.view_tag=viewTag;
+        this.o_Xcoordinate=x;
+        this.o_Ycoordinate=y;
+        this.o_initXcoordinate=initx;
+        this.o_initYcoordinate=inity;
+    }
 
     public Object_assoc(String name, String desc, String imgName, String viewTag, float x, float y){
         this.o_name=name;
@@ -41,6 +54,13 @@ public class Object_assoc implements Serializable {
         return o_Ycoordinate;
     }
 
+    public float getO_initYcoordinate() {
+        return o_initYcoordinate;
+    }
+
+    public float getO_initXcoordinate() {
+        return o_initXcoordinate;
+    }
     //Setters
 
     public void setO_desc(String o_desc) {
@@ -57,5 +77,13 @@ public class Object_assoc implements Serializable {
 
     public void setO_Ycoordinate(float o_Ycoordinate) {
         this.o_Ycoordinate = o_Ycoordinate;
+    }
+
+    public void setO_initXcoordinate(float o_initXcoordinate) {
+        this.o_initXcoordinate = o_initXcoordinate;
+    }
+
+    public void setO_initYcoordinate(float o_initYcoordinate) {
+        this.o_initYcoordinate = o_initYcoordinate;
     }
 }

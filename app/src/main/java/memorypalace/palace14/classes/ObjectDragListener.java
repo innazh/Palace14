@@ -60,17 +60,13 @@ public class ObjectDragListener implements View.OnDragListener {
 
             case DragEvent.ACTION_DROP:
                 View view = (View) event.getLocalState();
-                float x = event.getX();
+                float x = event.getX()+dragView.getWidth();
                 float y = event.getY();
-
+                System.out.println("ACTION_DROP_FINAL_X: " + x);
+                System.out.println("ACTION_DROP_FINAL_Y: " + y);
                 /*Here, I want to try to get mouse coordinates later (idk maybe its stupid idea and i shouldnt*/
-                draggedX = (x+dragView.getWidth());
-                draggedY = y;
-//Last changes:
-                dragView.setX(draggedX);// -(view.getWidth()/2));
-                dragView.setY(draggedY);
-
-
+                dragView.setX(x);// -(view.getWidth()/2));
+                dragView.setY(y);
 
                 callAddObjectDialog(this.context, x, y, view.getTag().toString());
 
@@ -84,8 +80,8 @@ public class ObjectDragListener implements View.OnDragListener {
                 }
                 // SUBJECT TO CHANGE
                 dragView.setVisibility(View.VISIBLE);
-                System.out.println("ACTION_DROP_FINAL_X: " + dragView.getX());
-                System.out.println("ACTION_DROP_FINAL_Y: " + dragView.getY());
+                //System.out.println("ACTION_DROP_FINAL_X: " + dragView.getX());
+                //System.out.println("ACTION_DROP_FINAL_Y: " + dragView.getY());
 
                 break;
             default:
@@ -152,7 +148,9 @@ public class ObjectDragListener implements View.OnDragListener {
                 globalRes = true;
                 System.out.println("SAVE THE OBJECT");
                 // Add the object with its name, description and final x and y after dropped coordinates
-                palace.addObject(new Object_assoc(objName.getText().toString(),objDesc.getText().toString(), viewTag,imgName ,draggedX, draggedY));
+                System.out.println("CREATE OBJECT X : " + x);
+                System.out.println("CREATE OBJECT Y : " + y);
+                palace.addObject(new Object_assoc(objName.getText().toString(),objDesc.getText().toString(), viewTag,imgName ,x, y, initialX, initialY));
                 saveObject();
                 //modObject = new Object_assoc(objName.getText().toString(),objDesc.getText().toString(), viewTag,imgName ,draggedX, draggedY);
                 myDialog.cancel();
