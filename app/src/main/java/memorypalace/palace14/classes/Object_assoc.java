@@ -1,6 +1,4 @@
 package memorypalace.palace14.classes;
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
 
 public class Object_assoc implements Serializable {
@@ -8,7 +6,6 @@ public class Object_assoc implements Serializable {
     private String o_desc;
     private String o_imgName; //ImageName
     private String view_tag;
-    private Bitmap o_memory;
     boolean hasChanged;
     private float o_initXcoordinate;
     private float o_initYcoordinate;
@@ -74,8 +71,6 @@ public class Object_assoc implements Serializable {
     public float getO_initXcoordinate() {
         return o_initXcoordinate;
     }
-
-    public Bitmap getMemory(){ return this.o_memory; }
     //Setters
 
     public void setO_desc(String o_desc) {
@@ -101,9 +96,4 @@ public class Object_assoc implements Serializable {
     public void setO_initYcoordinate(float o_initYcoordinate) {
         this.o_initYcoordinate = o_initYcoordinate;
     }
-
-    public void setO_memory(Bitmap memory){
-        this.o_memory = memory;
-    }
-
 }
