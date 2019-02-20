@@ -28,7 +28,9 @@
         <activity android:name=".ChoosePalaceSave" />
         <activity
             android:name=".MyPalaceDetail"
-            android:label="@string/title_activity_my_palace_detail"></activity>
+            android:label="@string/title_activity_my_palace_detail" />
+        <activity android:name=".CreateRoute" />
+        <activity android:name=".RouteListView"></activity>
     </application>
 
 </manifest>

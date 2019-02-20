@@ -1,10 +1,14 @@
 package memorypalace.palace14;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +31,9 @@ import memorypalace.palace14.classes.PalaceList;
 
 public class MyPalaceDetail extends AppCompatActivity {
 
-    public enum toolList{objStool, objBarStool, objDinningSet, objBookshelf};
+    public enum toolList {objStool, objBarStool, objDinningSet, objBookshelf}
+
+    ;
 
     toolList toolChoice;
     ObjectDragListener lol;
@@ -36,8 +42,52 @@ public class MyPalaceDetail extends AppCompatActivity {
     private TextView mTextMessage;
     private ImageView myPalaceDetailImg; //ImageView for Palace Img
     private ImageView objStool, objBarStool, objDinningSet, objBookshelf; //ImageViews for objects
-    private int palacePosition;
-    //private Button homeButton;
+    private int palacePosition, objectNumber;
+    private Button routeListBtn;
+    private Object_assoc newObj;
+
+    // For taking images
+    private final int REQUEST_IMAGE_CAPTURE = 101;
+
+    public void takePicture(View view) {
+        Intent imageTakeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (imageTakeIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(imageTakeIntent, REQUEST_IMAGE_CAPTURE);
+        }
+
+        System.out.println("TAKE THE BLOODY PICTURE ");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        System.out.println("ACTIVITY BOLLOCKS ");
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            // Need to set image of Object here to object.
+            // Any way to know which object is currently open?
+            newObj.setO_memory(imageBitmap);
+
+            setContentView(R.layout.view_existing_obj_pop_up);
+
+            final ImageView mImageView = findViewById(R.id.clickedObjImage);
+
+            System.out.println("This one ACTIVITY");
+            // Write object to Palace File
+            listOfMyPalaces.writePalacesFile(MyPalaceDetail.this);
+
+            // Set image
+            mImageView.setImageBitmap(imageBitmap);
+
+            setContentView(R.layout.activity_my_palace_detail);
+            init();
+            initDraggingListening();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +115,11 @@ public class MyPalaceDetail extends AppCompatActivity {
                 this.listOfMyPalaces.writePalacesFile(this);
                 lol.setGlobalRes(false);
             }
+        } catch (RuntimeException e) {
         }
-        catch (RuntimeException e){}
 
         /*if (lol.getGlobalRes() && lol.objectRet() != null) {
-            //palaceClicked.addObject(lol.objectRet());
+            //currentPalace.addObject(lol.objectRet());
             System.out.println("WILL THIS EVER HAPPEN?");
         }*/
     }
@@ -78,8 +128,9 @@ public class MyPalaceDetail extends AppCompatActivity {
         return !dragEvent.getResult();
     }
 
-    public void initDraggingListening(){
-        lol = new ObjectDragListener(this, palaceClicked,listOfMyPalaces);
+    @SuppressLint("ClickableViewAccessibility")
+    public void initDraggingListening() {
+        lol = new ObjectDragListener(this, palaceClicked, listOfMyPalaces);
         //Sets the target for the dropping action
         findViewById(R.id.myPalaceImg).setOnDragListener(lol);
         // Assign Tags to objects for creation of ClipData Objects.
@@ -114,15 +165,31 @@ public class MyPalaceDetail extends AppCompatActivity {
             }
         });
 
+        routeListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyPalaceDetail.this, RouteListView.class);
+                //Create a bundle to pass a PalaceList as an extra to the new activity
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("palaceList", listOfMyPalaces);
+
+                //Pass in the position of a clicked palace
+                bundle.putInt("position", palacePosition);
+
+                intent.putExtra("list", bundle);
+                startActivity(intent);
+            }
+        });
+
         //Determine what happens if the blueprint is clicked
         myPalaceDetailImg.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    if(toolChoice!=null) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (toolChoice != null) {
                         final EditText objName, objDesc;
-                        Button saveBtn, cancelBtn;
+                        Button saveBtn, cancelBtn, snapBtn;
                         final Dialog myDialog;
                         myDialog = new Dialog(MyPalaceDetail.this);
                         final float endX = (int) event.getX();
@@ -131,10 +198,11 @@ public class MyPalaceDetail extends AppCompatActivity {
                         myDialog.setContentView(R.layout.add_object_pop_up);
                         myDialog.setCancelable(false);
 
-                        objName=myDialog.findViewById(R.id.objectNameInput);
-                        objDesc=myDialog.findViewById(R.id.objectDescInput);
-                        saveBtn=myDialog.findViewById(R.id.saveBtnObjInpt);
-                        cancelBtn=myDialog.findViewById(R.id.cancelBtnObjInpt);
+                        objName = myDialog.findViewById(R.id.objectNameInput);
+                        objDesc = myDialog.findViewById(R.id.objectDescInput);
+                        saveBtn = myDialog.findViewById(R.id.saveBtnObjInpt);
+                        cancelBtn = myDialog.findViewById(R.id.cancelBtnObjInpt);
+//                        snapBtn=myDialog.findViewById(R.id.sn)
 
                         myDialog.show();
 
@@ -143,7 +211,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 //declared final for the img onclick
-                                final Object_assoc newObj;
+                                //final Object_assoc newObj;
 
                                 RelativeLayout myLayout = findViewById(R.id.relativeLayoutPalaceDetail);
                                 final ImageView newObjImgView = new ImageView(MyPalaceDetail.this);
@@ -151,36 +219,36 @@ public class MyPalaceDetail extends AppCompatActivity {
 
                                 switch (toolChoice) {
                                     case objBarStool:
-                                        newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(),"barstool", "barstool.png", endX, endY);
+                                        newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(), "barstool", "barstool.png", endX, endY);
                                         palaceClicked.addObject(newObj);
                                         newObjImgView.setImageResource(R.drawable.barstool);
                                         break;
 
                                     case objBookshelf:
-                                        newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(),"bookcase", "bookcase.png", endX, endY);
+                                        newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(), "bookcase", "bookcase.png", endX, endY);
                                         palaceClicked.addObject(newObj);
                                         newObjImgView.setImageResource(R.drawable.bookcase);
                                         break;
 
                                     case objDinningSet:
-                                        newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(),"diningset", "diningset.png", endX, endY);
+                                        newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(), "diningset", "diningset.png", endX, endY);
                                         palaceClicked.addObject(newObj);
                                         newObjImgView.setImageResource(R.drawable.diningset);
                                         break;
 
                                     case objStool:
-                                        newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(),"stool", "stool.png", endX, endY);
+                                        newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(), "stool", "stool.png", endX, endY);
                                         palaceClicked.addObject(newObj);
                                         newObjImgView.setImageResource(R.drawable.stool);
                                         break;
 
                                     default:
-                                        newObj = new Object_assoc("", "","", "", endX, endY);
+                                        newObj = new Object_assoc("", "", "", "", endX, endY);
                                         break;
                                 }
                                 //Set the new coordinates
-                                newObjImgView.setX(endX+50);
-                                newObjImgView.setY(endY-50);
+                                newObjImgView.setX(endX + 50);
+                                newObjImgView.setY(endY - 50);
                                 //Set layout of the new Object ImageView and add it to the current layout
                                 newObjImgView.setLayoutParams(new RelativeLayout.LayoutParams((int) getResources().getDimension(R.dimen.imageview_obj_width), (int) getResources().getDimension(R.dimen.imageview_obj_height)));
                                 myLayout.addView(newObjImgView);
@@ -200,15 +268,18 @@ public class MyPalaceDetail extends AppCompatActivity {
                                         myDialog.setCancelable(false);
 
                                         //Get all the fields from the XML file
-                                        final EditText clickedObjName=myDialog.findViewById(R.id.clickedObjName);
-                                        final EditText clickedObjDesc=myDialog.findViewById(R.id.clickedObjDesc);
-                                        Button clickedsaveBtn=myDialog.findViewById(R.id.editClickedObjSave);
-                                        Button clickedcancelBtn=myDialog.findViewById(R.id.editClickedObjCancel);
-                                        Button clickeddeleteBtn=myDialog.findViewById(R.id.clickedObjDeleteUnique);
+                                        final ImageView clickedObjImage = myDialog.findViewById(R.id.clickedObjImage);
+                                        final EditText clickedObjName = myDialog.findViewById(R.id.clickedObjName);
+                                        final EditText clickedObjDesc = myDialog.findViewById(R.id.clickedObjDesc);
+                                        Button clickedsaveBtn = myDialog.findViewById(R.id.editClickedObjSave);
+                                        Button clickedcancelBtn = myDialog.findViewById(R.id.editClickedObjCancel);
+                                        Button clickeddeleteBtn = myDialog.findViewById(R.id.clickedObjDeleteUnique);
+                                        Button clickedSnapBtn = myDialog.findViewById(R.id.clickedObjectImgCapture);
 
                                         //Set the data fields
                                         clickedObjName.setText(objName.getText().toString());
                                         clickedObjDesc.setText(objDesc.getText().toString());
+                                        clickedObjImage.setImageBitmap(palaceClicked.getObject(objectNumber).getMemory());
 
                                         myDialog.show();
 
@@ -245,6 +316,22 @@ public class MyPalaceDetail extends AppCompatActivity {
                                                 myDialog.cancel();
                                             }
                                         });
+
+                                        // Need to take care of snap button.
+                                        clickedSnapBtn.setOnClickListener(new View.OnClickListener() {
+
+                                            @Override
+                                        public void onClick(View v) {
+
+
+                                            // Need to figure out what happens first
+                                            System.out.println("On Click BOLLOCKS");
+                                            // Code the shit that deals with taking pictures etc. here
+                                            //palaceClicked.getObject(objectNumber).setO_memory();
+                                            System.out.println("THIS ONE button");
+                                            }
+                                        });
+
                                     }
                                 });
                                 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -269,13 +356,14 @@ public class MyPalaceDetail extends AppCompatActivity {
         });
     }
 
-    public void init(){
+    public void init() {
         //Initialize the blueprint and objects:
         myPalaceDetailImg = findViewById(R.id.myPalaceImg);
         objStool = findViewById(R.id.objectStool);
         objBarStool = findViewById(R.id.objectBarstool);
         objDinningSet = findViewById(R.id.objectDiningset);
         objBookshelf = findViewById(R.id.objectBookShelf);
+        routeListBtn = findViewById(R.id.viewRouteListBtn);
 
         objStool.setTag("stool.png");
         objBarStool.setTag("barstool.png");
@@ -287,11 +375,11 @@ public class MyPalaceDetail extends AppCompatActivity {
         //Initialize the bottom navigation menu
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
 
         //Get data from the received intent:
         Bundle bundle = intent.getBundleExtra("list");
-        listOfMyPalaces =  (PalaceList) bundle.getSerializable("palaceList");
+        listOfMyPalaces = (PalaceList) bundle.getSerializable("palaceList");
         palacePosition = bundle.getInt("position");
         //Get position of the palace clicked on the list
         palaceClicked = listOfMyPalaces.getPalace(palacePosition);
@@ -303,30 +391,31 @@ public class MyPalaceDetail extends AppCompatActivity {
         System.out.println("number of objects: " + palaceClicked.getListLength());
 
         // Set the coordinates of any moved Objects
-        if(palaceClicked.getListLength() > 0){
+        if (palaceClicked.getListLength() > 0) {
 
             //Iterate through the existent objects and place the image views accordingly
-            for(int i = 0; i < palaceClicked.getListLength(); i++){
-                final int objectNumber=i;
+            for (int i = 0; i < palaceClicked.getListLength(); i++) {
+                //final int objectNumber=i;
+                objectNumber = i;
                 final RelativeLayout thisLayout = findViewById(R.id.relativeLayoutPalaceDetail);
                 final ImageView existentImageView = new ImageView(MyPalaceDetail.this);
 
                 //Set the right picture
-                if(palaceClicked.getObject(i).getView_tag().compareTo("barstool.png")==0)
+                if (palaceClicked.getObject(i).getView_tag().compareTo("barstool.png") == 0)
                     existentImageView.setImageResource(R.drawable.barstool);
-                else if(palaceClicked.getObject(i).getView_tag().compareTo("diningset.png")==0)
+                else if (palaceClicked.getObject(i).getView_tag().compareTo("diningset.png") == 0)
                     existentImageView.setImageResource(R.drawable.diningset);
-                else if(palaceClicked.getObject(i).getView_tag().compareTo("stool.png")==0)
+                else if (palaceClicked.getObject(i).getView_tag().compareTo("stool.png") == 0)
                     existentImageView.setImageResource(R.drawable.stool);
-                else if(palaceClicked.getObject(i).getView_tag().compareTo("bookcase.png")==0)
+                else if (palaceClicked.getObject(i).getView_tag().compareTo("bookcase.png") == 0)
                     existentImageView.setImageResource(R.drawable.bookcase);
 
                 //Put the object on top
                 existentImageView.setElevation(7); //Why does it have 7? LOL
 
                 //Set the new coordinates
-                existentImageView.setX(palaceClicked.getObject(i).getO_Xcoordinate()+50);
-                existentImageView.setY(palaceClicked.getObject(i).getO_Ycoordinate()-50);
+                existentImageView.setX(palaceClicked.getObject(i).getO_Xcoordinate() + 50);
+                existentImageView.setY(palaceClicked.getObject(i).getO_Ycoordinate() - 50);
 
                 //Onclick listener on the existent object
                 existentImageView.setOnClickListener(new View.OnClickListener() {
@@ -339,11 +428,11 @@ public class MyPalaceDetail extends AppCompatActivity {
                         myDialog.setCancelable(false);
 
                         //Get all the fields from the XML file
-                        final EditText clickedObjName=myDialog.findViewById(R.id.clickedObjName);
-                        final EditText clickedObjDesc=myDialog.findViewById(R.id.clickedObjDesc);
-                        Button clickedsaveBtn=myDialog.findViewById(R.id.editClickedObjSave);
-                        Button clickedcancelBtn=myDialog.findViewById(R.id.editClickedObjCancel);
-                        Button clickeddeleteBtn=myDialog.findViewById(R.id.clickedObjDeleteUnique);
+                        final EditText clickedObjName = myDialog.findViewById(R.id.clickedObjName);
+                        final EditText clickedObjDesc = myDialog.findViewById(R.id.clickedObjDesc);
+                        Button clickedsaveBtn = myDialog.findViewById(R.id.editClickedObjSave);
+                        Button clickedcancelBtn = myDialog.findViewById(R.id.editClickedObjCancel);
+                        Button clickeddeleteBtn = myDialog.findViewById(R.id.clickedObjDeleteUnique);
 
                         //Set the data fields
                         clickedObjName.setText(palaceClicked.getObject(objectNumber).getName());
@@ -394,10 +483,10 @@ public class MyPalaceDetail extends AppCompatActivity {
         }
     }
 
-    protected void changeLocation(View locToChange, float x, float y, float startX, float startY){
+    protected void changeLocation(View locToChange, float x, float y, float startX, float startY) {
 
 
-        TranslateAnimation animation = new TranslateAnimation(startX, x, startY, y-550);
+        TranslateAnimation animation = new TranslateAnimation(startX, x, startY, y - 550);
         animation.setDuration(100);
         animation.setFillAfter(true);
         locToChange.startAnimation(animation);
@@ -444,8 +533,21 @@ public class MyPalaceDetail extends AppCompatActivity {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     return true;
+
                 case R.id.navigation_create_path:
+
                     mTextMessage.setText(R.string.create_path);
+                    Intent intent = new Intent(MyPalaceDetail.this, CreateRoute.class);
+                    //Create a bundle to pass a PalaceList as an extra to the new activity
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("palaceList", listOfMyPalaces);
+
+                    //Pass in the position of a clicked palace
+                    bundle.putInt("position", palacePosition);
+
+                    intent.putExtra("list", bundle);
+                    startActivity(intent);
+
                     return true;
                 case R.id.navigation_rename_palace:
                     mTextMessage.setText(R.string.rename_palace);

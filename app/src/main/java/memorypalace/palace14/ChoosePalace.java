@@ -36,7 +36,7 @@ public class ChoosePalace extends AppCompatActivity {
         text1 = findViewById(R.id.temp1Name);
         text2 = findViewById(R.id.temp2Name);
         text3 = findViewById(R.id.temp3Name);
-        text4 = findViewById(R.id.textName);
+        text4 = findViewById(R.id.rLName);
 
         //Set all the images to the images in drawable
         image1.setImageResource(R.drawable.one);

@@ -7,7 +7,7 @@
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
-        android:id="@+id/textName"
+        android:id="@+id/rLName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="98dp"
@@ -27,7 +27,7 @@
         android:layout_marginLeft="6dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="25dp"
-        app:layout_constraintEnd_toStartOf="@+id/textName"
+        app:layout_constraintEnd_toStartOf="@+id/rLName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />

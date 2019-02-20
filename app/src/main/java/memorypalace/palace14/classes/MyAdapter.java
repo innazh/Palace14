@@ -55,7 +55,7 @@ public class MyAdapter extends BaseAdapter         //has a class viewholder whic
             rowView = layoutInflater.inflate(R.layout.view_palace_list_content, parent, false);
             viewHolder = new ViewHolder();
 
-            viewHolder.textName = rowView.findViewById(R.id.textName);
+            viewHolder.textName = rowView.findViewById(R.id.rLName);
             viewHolder.imageView = rowView.findViewById(R.id.imageView);
 
             rowView.setTag(viewHolder);

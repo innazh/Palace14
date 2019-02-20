@@ -6,23 +6,19 @@
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="25dp">
 
-    <ListView
-        android:id="@+id/viewRouteListID"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:id="@+id/emptyRouteTV"
-        android:layout_width="wrap_content"
+        android:id="@+id/rLName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="There's nothing here yet."
+        android:layout_marginEnd="100dp"
+        android:layout_marginTop="40dp"
+        android:clickable="false"
+        android:ems="10"
+        android:focusable="false"
+        android:paddingLeft="20dp"
+        android:paddingTop="16dp"
         android:textSize="15sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

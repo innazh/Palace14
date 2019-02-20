@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,7 +28,7 @@ public class ViewPalaceList  extends AppCompatActivity {
         setContentView(R.layout.activity_view_palace_list);
 
         //Find the list view in XML file and put it in our local variable
-        palaceListView = findViewById(R.id.viewPalaceListID);
+        palaceListView = findViewById(R.id.viewObjectListID);
         emptyPalaceList = findViewById(R.id.emptyPalacesTV);
 
         //Initialize a path to the file and create a variable for the list of created palaces

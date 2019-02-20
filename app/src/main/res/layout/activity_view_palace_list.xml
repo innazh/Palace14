@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/crTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
@@ -17,18 +17,18 @@
         android:text="My palaces:"
         android:textSize="30sp"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="@+id/viewPalaceListID"
+        app:layout_constraintStart_toStartOf="@+id/viewObjectListID"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/viewPalaceListID"
+        android:id="@+id/viewObjectListID"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/crTitle" />
 
     <TextView
         android:id="@+id/emptyPalacesTV"
