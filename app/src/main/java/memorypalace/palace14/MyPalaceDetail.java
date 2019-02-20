@@ -3,8 +3,11 @@ package memorypalace.palace14;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -37,13 +40,68 @@ public class MyPalaceDetail extends AppCompatActivity {
     private ImageView myPalaceDetailImg; //ImageView for Palace Img
     private ImageView objStool, objBarStool, objDinningSet, objBookshelf; //ImageViews for objects
     private int palacePosition;
+    private Object_assoc newObj;
+
+
+
+    // For taking images
+    private final int REQUEST_IMAGE_CAPTURE = 101;
+
+    public void takePicture(View view)
+    {
+        Intent imageTakeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if(imageTakeIntent.resolveActivity(getPackageManager()) !=null)
+        {
+            startActivityForResult(imageTakeIntent,REQUEST_IMAGE_CAPTURE);
+        }
+
+        System.out.println("TAKE THE BLOODY PICTURE ");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+
+        System.out.println("ACTIVITY BOLLOCKS ");
+
+        if(requestCode==REQUEST_IMAGE_CAPTURE && resultCode==RESULT_OK){
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            // Need to set image of Object here to object.
+            // Any way to know which object is currently open?
+            newObj.setO_memory(imageBitmap);
+
+            setContentView(R.layout.view_existing_obj_pop_up);
+
+            final ImageView mImageView = findViewById(R.id.clickedObjImage);
+
+            System.out.println("This one ACTIVITY");
+            // Write object to Palace File
+            listOfMyPalaces.writePalacesFile(MyPalaceDetail.this);
+
+            // Set image
+            mImageView.setImageBitmap(imageBitmap);
+
+            setContentView(R.layout.activity_my_palace_detail);
+            init();
+            initDraggingListening();
+        }
+
+
+
+    }
+
     //private Button homeButton;
+    // NEED IDENTIFIER TO DETECT WHETHER BUTTON HAS BEEN PRESSED OR NOT, to prevent pressing on empty and instatiating
+    // Object needs to be able to be edited
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_palace_detail);
-
+        //mImageView  = findViewById(R.id.clickedObjImage);
         //Function that initializes all the variables
         init();
         //Sets up all the dragging and dropping functionality
@@ -122,7 +180,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                 if(event.getAction()==MotionEvent.ACTION_DOWN){
                     if(toolChoice!=null) {
                         final EditText objName, objDesc;
-                        Button saveBtn, cancelBtn;
+                        Button saveBtn, cancelBtn, snapBtn;
                         final Dialog myDialog;
                         myDialog = new Dialog(MyPalaceDetail.this);
                         final float endX = (int) event.getX();
@@ -135,6 +193,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                         objDesc=myDialog.findViewById(R.id.objectDescInput);
                         saveBtn=myDialog.findViewById(R.id.saveBtnObjInpt);
                         cancelBtn=myDialog.findViewById(R.id.cancelBtnObjInpt);
+                       // snapBtn=myDialog.findViewById(R.id.);
 
                         myDialog.show();
 
@@ -143,7 +202,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 //declared final for the img onclick
-                                final Object_assoc newObj;
+                                //final Object_assoc newObj;
 
                                 RelativeLayout myLayout = findViewById(R.id.relativeLayoutPalaceDetail);
                                 final ImageView newObjImgView = new ImageView(MyPalaceDetail.this);
@@ -209,6 +268,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                                         //Set the data fields
                                         clickedObjName.setText(objName.getText().toString());
                                         clickedObjDesc.setText(objDesc.getText().toString());
+
 
                                         myDialog.show();
 
@@ -339,13 +399,16 @@ public class MyPalaceDetail extends AppCompatActivity {
                         myDialog.setCancelable(false);
 
                         //Get all the fields from the XML file
+                        final ImageView clickedObjImage = myDialog.findViewById(R.id.clickedObjImage);
                         final EditText clickedObjName=myDialog.findViewById(R.id.clickedObjName);
                         final EditText clickedObjDesc=myDialog.findViewById(R.id.clickedObjDesc);
                         Button clickedsaveBtn=myDialog.findViewById(R.id.editClickedObjSave);
                         Button clickedcancelBtn=myDialog.findViewById(R.id.editClickedObjCancel);
                         Button clickeddeleteBtn=myDialog.findViewById(R.id.clickedObjDeleteUnique);
+                        Button clickedSnapBtn = myDialog.findViewById(R.id.clickedObjectImgCapture);
 
                         //Set the data fields
+                        clickedObjImage.setImageBitmap(palaceClicked.getObject(objectNumber).getMemory());
                         clickedObjName.setText(palaceClicked.getObject(objectNumber).getName());
                         clickedObjDesc.setText(palaceClicked.getObject(objectNumber).getDesc());
 
@@ -383,6 +446,24 @@ public class MyPalaceDetail extends AppCompatActivity {
                                 myDialog.cancel();
                             }
                         });
+
+                        // Need to take care of snap button.
+                        clickedSnapBtn.setOnClickListener(new View.OnClickListener()  {
+
+                            @Override
+                            public void onClick(View v) {
+
+
+                                // Need to figure out what happens first
+                                System.out.println("On Click BOLLOCKS");
+
+                                // Code the shit that deals with taking pictures etc. here
+
+                                //palaceClicked.getObject(objectNumber).setO_memory();
+                                System.out.println("THIS ONE button");
+                            }
+                        }
+                        );
                     }
                 });
 
