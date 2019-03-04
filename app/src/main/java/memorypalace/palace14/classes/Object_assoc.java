@@ -14,6 +14,7 @@ public class Object_assoc implements Serializable {
     private float o_Xcoordinate;
     private float o_Ycoordinate;
     private Bitmap o_memory;
+    private int o_identifier;
 
     public Object_assoc(String name, String desc, String imgName, String viewTag, float x, float y, float initx, float inity){
         this.o_name=name;
@@ -104,6 +105,16 @@ public class Object_assoc implements Serializable {
     }
 
     public void setO_memory(Bitmap memory){
-        this.o_memory = memory;
+        if(memory != null) {
+            this.o_memory = memory;
+        }
+    }
+
+    public void setO_identifier(int key){
+        o_identifier = key;
+    }
+
+    public int get_identifier(){
+        return o_identifier;
     }
 }

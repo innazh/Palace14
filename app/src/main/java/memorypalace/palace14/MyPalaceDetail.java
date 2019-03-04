@@ -33,8 +33,6 @@ public class MyPalaceDetail extends AppCompatActivity {
 
     public enum toolList {objStool, objBarStool, objDinningSet, objBookshelf}
 
-    ;
-
     toolList toolChoice;
     ObjectDragListener lol;
     PalaceList listOfMyPalaces;
@@ -45,24 +43,29 @@ public class MyPalaceDetail extends AppCompatActivity {
     private int palacePosition, objectNumber;
     private Button routeListBtn;
     private Object_assoc newObj;
+    public int keyOfOpenObject;
 
     // For taking images
     private final int REQUEST_IMAGE_CAPTURE = 101;
 
     public void takePicture(View view) {
+        System.out.println("wayat");
         Intent imageTakeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
+        System.out.println("wayat");
+        System.out.println("wayatKEY: " + keyOfOpenObject);
         if (imageTakeIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(imageTakeIntent, REQUEST_IMAGE_CAPTURE);
         }
+        else{
+            System.out.println("wayat not working");
+        }
 
-        System.out.println("TAKE THE BLOODY PICTURE ");
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        System.out.println("ACTIVITY BOLLOCKS ");
+
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
@@ -70,22 +73,47 @@ public class MyPalaceDetail extends AppCompatActivity {
 
             // Need to set image of Object here to object.
             // Any way to know which object is currently open?
-            newObj.setO_memory(imageBitmap);
+
+            System.out.println("Crash Check 1");
+
+            // newObj is a nullpointer, We need to track which object is open in the dialog, but how???????
+            //newObj = new Object_assoc();
+
+
+            //System.out.println("ObjName: " + newObj.getName()+ "ObjDesc" + newObj.getDesc());
+
+            System.out.println("Crash Check 2");
+            System.out.println("Current key: " + keyOfOpenObject);
+            //newObj = palaceClicked.getObjectByKey(keyOfOpenObject);
+
+            System.out.println("Crash Check 2.5 ");
+
+            newObj.setO_memory(imageBitmap );
+
+            System.out.println("Crash Check 3");
 
             setContentView(R.layout.view_existing_obj_pop_up);
 
+            System.out.println("Crash Check 4");
+
             final ImageView mImageView = findViewById(R.id.clickedObjImage);
 
-            System.out.println("This one ACTIVITY");
+            //System.out.println("This one ACTIVITY");
             // Write object to Palace File
             listOfMyPalaces.writePalacesFile(MyPalaceDetail.this);
 
             // Set image
             mImageView.setImageBitmap(imageBitmap);
 
-            setContentView(R.layout.activity_my_palace_detail);
-            init();
-            initDraggingListening();
+            // Sets the current view back to the palace detail(Unsuccessful though)
+            //setContentView(R.layout.activity_my_palace_detail);
+            // Resets the Dialog to include the image that has been taken with the camera
+
+            //init();
+            //initDraggingListening();
+
+
+
         }
     }
 
@@ -200,9 +228,20 @@ public class MyPalaceDetail extends AppCompatActivity {
 
                         objName = myDialog.findViewById(R.id.objectNameInput);
                         objDesc = myDialog.findViewById(R.id.objectDescInput);
+
+                        // Set a unique identifier for the object, this may not work as newObj, can be null when viewing a palace with existing objects,
+                        // Without creating new objects
+
+
+
+                        // Set the key of Open Object
+
+                        // Check for an object that is open
+                        System.out.println("SCOTT BLYAT");
+
                         saveBtn = myDialog.findViewById(R.id.saveBtnObjInpt);
                         cancelBtn = myDialog.findViewById(R.id.cancelBtnObjInpt);
-//                        snapBtn=myDialog.findViewById(R.id.sn)
+//                        snapBtn=myDialog.findViewById(R.id.sn);
 
                         myDialog.show();
 
@@ -220,30 +259,40 @@ public class MyPalaceDetail extends AppCompatActivity {
                                 switch (toolChoice) {
                                     case objBarStool:
                                         newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(), "barstool", "barstool.png", endX, endY);
+                                        newObj.setO_identifier(palaceClicked.getValidIdentifier());
                                         palaceClicked.addObject(newObj);
+                                        System.out.println("Key: " + newObj.get_identifier());
                                         newObjImgView.setImageResource(R.drawable.barstool);
                                         break;
 
                                     case objBookshelf:
                                         newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(), "bookcase", "bookcase.png", endX, endY);
+                                        newObj.setO_identifier(palaceClicked.getValidIdentifier());
                                         palaceClicked.addObject(newObj);
+                                        System.out.println("Key: " + newObj.get_identifier());
                                         newObjImgView.setImageResource(R.drawable.bookcase);
                                         break;
 
                                     case objDinningSet:
                                         newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(), "diningset", "diningset.png", endX, endY);
+                                        newObj.setO_identifier(palaceClicked.getValidIdentifier());
                                         palaceClicked.addObject(newObj);
+                                        System.out.println("Key: " + newObj.get_identifier());
                                         newObjImgView.setImageResource(R.drawable.diningset);
                                         break;
 
                                     case objStool:
                                         newObj = new Object_assoc(objName.getText().toString(), objDesc.getText().toString(), "stool", "stool.png", endX, endY);
+                                        newObj.setO_identifier(palaceClicked.getValidIdentifier());
                                         palaceClicked.addObject(newObj);
+                                        System.out.println("Key: " + newObj.get_identifier());
                                         newObjImgView.setImageResource(R.drawable.stool);
                                         break;
 
                                     default:
                                         newObj = new Object_assoc("", "", "", "", endX, endY);
+                                        newObj.setO_identifier(palaceClicked.getValidIdentifier());
+                                        System.out.println("Key: " + newObj.get_identifier());
                                         break;
                                 }
                                 //Set the new coordinates
@@ -252,6 +301,9 @@ public class MyPalaceDetail extends AppCompatActivity {
                                 //Set layout of the new Object ImageView and add it to the current layout
                                 newObjImgView.setLayoutParams(new RelativeLayout.LayoutParams((int) getResources().getDimension(R.dimen.imageview_obj_width), (int) getResources().getDimension(R.dimen.imageview_obj_height)));
                                 myLayout.addView(newObjImgView);
+
+                                keyOfOpenObject = newObj.get_identifier();
+                                System.out.println("Set Key: " + newObj.get_identifier());
 
                                 /*This code is needed for the following case:
                                 We're looking at the blueprint and decide to add and object.
@@ -264,11 +316,13 @@ public class MyPalaceDetail extends AppCompatActivity {
 
                                         myDialog = new Dialog(MyPalaceDetail.this);
 
+                                        // Set the identifier of the object that has been opened
+
                                         myDialog.setContentView(R.layout.view_existing_obj_pop_up);
                                         myDialog.setCancelable(false);
 
                                         //Get all the fields from the XML file
-                                        final ImageView clickedObjImage = myDialog.findViewById(R.id.clickedObjImage);
+                                        //final ImageView clickedObjImage = myDialog.findViewById(R.id.clickedObjImage);
                                         final EditText clickedObjName = myDialog.findViewById(R.id.clickedObjName);
                                         final EditText clickedObjDesc = myDialog.findViewById(R.id.clickedObjDesc);
                                         Button clickedsaveBtn = myDialog.findViewById(R.id.editClickedObjSave);
@@ -279,7 +333,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                                         //Set the data fields
                                         clickedObjName.setText(objName.getText().toString());
                                         clickedObjDesc.setText(objDesc.getText().toString());
-                                        clickedObjImage.setImageBitmap(palaceClicked.getObject(objectNumber).getMemory());
+                                        //clickedObjImage.setImageBitmap(palaceClicked.getObject(objectNumber).getMemory());
 
                                         myDialog.show();
 
@@ -322,12 +376,18 @@ public class MyPalaceDetail extends AppCompatActivity {
 
                                             @Override
                                         public void onClick(View v) {
+                                                System.out.println("wayat");
+                                                Intent imageTakeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                                System.out.println("wayat");
+                                                System.out.println("wayatKEY: " + keyOfOpenObject);
+                                                if (imageTakeIntent.resolveActivity(getPackageManager()) != null) {
+                                                    startActivityForResult(imageTakeIntent, REQUEST_IMAGE_CAPTURE);
+                                                }
+                                                else{
+                                                    System.out.println("wayat not working");
+                                                }
 
 
-                                            // Need to figure out what happens first
-                                            System.out.println("On Click BOLLOCKS");
-                                            // Code the shit that deals with taking pictures etc. here
-                                            //palaceClicked.getObject(objectNumber).setO_memory();
                                             System.out.println("THIS ONE button");
                                             }
                                         });
@@ -434,9 +494,12 @@ public class MyPalaceDetail extends AppCompatActivity {
                         Button clickedcancelBtn = myDialog.findViewById(R.id.editClickedObjCancel);
                         Button clickeddeleteBtn = myDialog.findViewById(R.id.clickedObjDeleteUnique);
 
+
                         //Set the data fields
                         clickedObjName.setText(palaceClicked.getObject(objectNumber).getName());
                         clickedObjDesc.setText(palaceClicked.getObject(objectNumber).getDesc());
+
+                        newObj = palaceClicked.getObject(objectNumber);
 
                         myDialog.show();
 

@@ -76,6 +76,56 @@ public class Palace implements Serializable {
         return this.objectList.size();
     }
 
+    // Method to return a valid Identifier for the palace(Generate a key)
+    public int getValidIdentifier() {
+
+        int [] takenIdentifiers = new int [getObjectListSize()];
+        boolean invalidIdentifier = false;
+
+        // Loop to find all Taken Identifiers
+        for(int i = 0; i < getObjectListSize(); i++){
+            takenIdentifiers[i] = getObject(i).get_identifier();
+        }
+
+        int primaryKey;
+
+        // Create a valid Identifier that is unique(AKA PRIMARY KEY)
+        do{
+
+            primaryKey = (int)(Math.random() * ((1000 - 0) + 1));
+            invalidIdentifier = false; // Assumes there key is unique
+
+            // Check for identifiers that are the same
+            for(int x = 0; x < getObjectListSize(); x++){
+                if(primaryKey == getObject(x).get_identifier()){
+                    invalidIdentifier = true;
+                }
+            }
+
+        }while(invalidIdentifier); // The key is unique
+
+        return primaryKey;
+
+    }
+
+    // Should return position or object??
+    public Object_assoc getObjectByKey(int keyToFind){
+
+        Object_assoc retObj = null;
+        boolean found = false;
+
+        for(int i = 0; i < getListLength() && !found; i++){
+
+            // Object with corresponding key is found, return its index
+            if(keyToFind == getObject(i).get_identifier()){
+                found = true;
+                retObj = getObject(i);
+            }
+        }
+        return retObj;
+
+    }
+
     //Route///////////////////////////////////////////
     public ArrayList<Object_assoc> getObjectList() {
         return this.objectList;

@@ -93,6 +93,9 @@ public class CreateRoute extends AppCompatActivity {
                     System.out.println(selectedObjects);
                 }
             });
+
+            Intent RouteIntent = new Intent(CreateRoute.this,ViewRoute.class );
+
         }
     }
 
