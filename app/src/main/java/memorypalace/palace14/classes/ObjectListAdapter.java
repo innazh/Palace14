@@ -85,6 +85,21 @@ public class ObjectListAdapter extends BaseAdapter {
                     break;
             }
 
+            Object_assoc obj = objectList.get(position);
+
+            if (obj.isSelected())
+                viewHolder.checkBox.setChecked(true);
+
+            else
+                viewHolder.checkBox.setChecked(false);
+
+
             return rowView;
         }
+
+        public void updateRecords(List<Object_assoc> objects){
+        this.objectList = objects;
+
+        notifyDataSetChanged();
+    }
 }

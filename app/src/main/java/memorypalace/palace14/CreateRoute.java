@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -80,7 +81,8 @@ public class CreateRoute extends AppCompatActivity {
         }
         else{
             //Creates an adapter and attaches it to the list object -> makes the list
-            adapter = new ObjectListAdapter(currentPalace.getObjectList(), getApplicationContext(), getLayoutInflater());
+            final ArrayList<Object_assoc> objects = currentPalace.getObjectList();
+            adapter = new ObjectListAdapter(objects, getApplicationContext(), getLayoutInflater());
             //objectsListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             objectsListView.setAdapter(adapter);
             System.out.println("ONE CHECK");
@@ -89,8 +91,20 @@ public class CreateRoute extends AppCompatActivity {
             objectsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Object_assoc one = objects.get(position);
+
+                    if (one.isSelected())
+                        one.setSelected(false);
+
+                    else
+                        one.setSelected(true);
+
+                    objects.set(position, one);
+
+                    //now update adapter
+                    adapter.updateRecords(objects);
+                    //Later on: make sure that when the box is checked and them unchecked the object is removed from the route list
                     selectedObjects.add(currentPalace.getObject(position));
-                    System.out.println(selectedObjects);
                 }
             });
 

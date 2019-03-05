@@ -6,15 +6,15 @@
     android:orientation="vertical"
     android:padding="10dp" >
 
-    <ImageView
-        android:id="@+id/clickedObjImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+    <!--<ImageView-->
+        <!--android:id="@+id/clickedObjImage"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
 
-    />
+    <!--/>-->
 
     <EditText
         android:id="@+id/clickedObjName"
@@ -59,13 +59,13 @@
         android:layout_marginRight="20dp"
         android:text="Cancel" />
 
-    <Button android:id="@+id/clickedObjectImgCapture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:onClick="takePicture"
-        android:text="Snap Memory" />
+    <!--<Button android:id="@+id/clickedObjectImgCapture"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:onClick="takePicture"-->
+        <!--android:text="Snap Memory" />-->
 
 
 </LinearLayout>

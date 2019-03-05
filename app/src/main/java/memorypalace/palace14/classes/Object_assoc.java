@@ -8,7 +8,7 @@ public class Object_assoc implements Serializable {
     private String o_desc;
     private String o_imgName; //ImageName
     private String view_tag;
-    boolean hasChanged;
+    boolean isSelected;//Only for ObjectAdapter
     private float o_initXcoordinate;
     private float o_initYcoordinate;
     private float o_Xcoordinate;
@@ -78,6 +78,10 @@ public class Object_assoc implements Serializable {
 
     public Bitmap getMemory(){ return this.o_memory; }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
     //Setters
 
     public void setO_desc(String o_desc) {
@@ -108,6 +112,10 @@ public class Object_assoc implements Serializable {
         if(memory != null) {
             this.o_memory = memory;
         }
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public void setO_identifier(int key){

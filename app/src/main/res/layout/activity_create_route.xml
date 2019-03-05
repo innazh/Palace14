@@ -12,7 +12,8 @@
         android:id="@+id/crTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="8dp"
+        android:paddingTop="24dp"
+        android:paddingLeft="16dp"
         android:text="Select object in order:"
         android:textSize="24sp"
         android:visibility="visible"
@@ -23,9 +24,11 @@
         android:id="@+id/routeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:paddingLeft="24dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Route Name"
+        android:hint="Route Name"
         app:layout_constraintStart_toStartOf="@+id/viewObjectListID"
         app:layout_constraintTop_toBottomOf="@+id/crTitle" />
 

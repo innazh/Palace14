@@ -43,79 +43,7 @@ public class MyPalaceDetail extends AppCompatActivity {
     private int palacePosition, objectNumber;
     private Button routeListBtn;
     private Object_assoc newObj;
-    public int keyOfOpenObject;
-
-    // For taking images
-    private final int REQUEST_IMAGE_CAPTURE = 101;
-
-    public void takePicture(View view) {
-        System.out.println("wayat");
-        Intent imageTakeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        System.out.println("wayat");
-        System.out.println("wayatKEY: " + keyOfOpenObject);
-        if (imageTakeIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(imageTakeIntent, REQUEST_IMAGE_CAPTURE);
-        }
-        else{
-            System.out.println("wayat not working");
-        }
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
-
-
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-            // Need to set image of Object here to object.
-            // Any way to know which object is currently open?
-
-            System.out.println("Crash Check 1");
-
-            // newObj is a nullpointer, We need to track which object is open in the dialog, but how???????
-            //newObj = new Object_assoc();
-
-
-            //System.out.println("ObjName: " + newObj.getName()+ "ObjDesc" + newObj.getDesc());
-
-            System.out.println("Crash Check 2");
-            System.out.println("Current key: " + keyOfOpenObject);
-            //newObj = palaceClicked.getObjectByKey(keyOfOpenObject);
-
-            System.out.println("Crash Check 2.5 ");
-
-            newObj.setO_memory(imageBitmap );
-
-            System.out.println("Crash Check 3");
-
-            setContentView(R.layout.view_existing_obj_pop_up);
-
-            System.out.println("Crash Check 4");
-
-            final ImageView mImageView = findViewById(R.id.clickedObjImage);
-
-            //System.out.println("This one ACTIVITY");
-            // Write object to Palace File
-            listOfMyPalaces.writePalacesFile(MyPalaceDetail.this);
-
-            // Set image
-            mImageView.setImageBitmap(imageBitmap);
-
-            // Sets the current view back to the palace detail(Unsuccessful though)
-            //setContentView(R.layout.activity_my_palace_detail);
-            // Resets the Dialog to include the image that has been taken with the camera
-
-            //init();
-            //initDraggingListening();
-
-
-
-        }
-    }
+//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -302,7 +230,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                                 newObjImgView.setLayoutParams(new RelativeLayout.LayoutParams((int) getResources().getDimension(R.dimen.imageview_obj_width), (int) getResources().getDimension(R.dimen.imageview_obj_height)));
                                 myLayout.addView(newObjImgView);
 
-                                keyOfOpenObject = newObj.get_identifier();
+                                //keyOfOpenObject = newObj.get_identifier();
                                 System.out.println("Set Key: " + newObj.get_identifier());
 
                                 /*This code is needed for the following case:
@@ -328,7 +256,6 @@ public class MyPalaceDetail extends AppCompatActivity {
                                         Button clickedsaveBtn = myDialog.findViewById(R.id.editClickedObjSave);
                                         Button clickedcancelBtn = myDialog.findViewById(R.id.editClickedObjCancel);
                                         Button clickeddeleteBtn = myDialog.findViewById(R.id.clickedObjDeleteUnique);
-                                        Button clickedSnapBtn = myDialog.findViewById(R.id.clickedObjectImgCapture);
 
                                         //Set the data fields
                                         clickedObjName.setText(objName.getText().toString());
@@ -368,27 +295,6 @@ public class MyPalaceDetail extends AppCompatActivity {
                                                 newObjImgView.setVisibility(View.GONE);
 
                                                 myDialog.cancel();
-                                            }
-                                        });
-
-                                        // Need to take care of snap button.
-                                        clickedSnapBtn.setOnClickListener(new View.OnClickListener() {
-
-                                            @Override
-                                        public void onClick(View v) {
-                                                System.out.println("wayat");
-                                                Intent imageTakeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                                System.out.println("wayat");
-                                                System.out.println("wayatKEY: " + keyOfOpenObject);
-                                                if (imageTakeIntent.resolveActivity(getPackageManager()) != null) {
-                                                    startActivityForResult(imageTakeIntent, REQUEST_IMAGE_CAPTURE);
-                                                }
-                                                else{
-                                                    System.out.println("wayat not working");
-                                                }
-
-
-                                            System.out.println("THIS ONE button");
                                             }
                                         });
 
@@ -635,3 +541,78 @@ public class MyPalaceDetail extends AppCompatActivity {
         return true;
     }
 }
+
+
+  //  public int keyOfOpenObject;
+//
+//    // For taking images
+//    private final int REQUEST_IMAGE_CAPTURE = 101;
+//
+//    public void takePicture(View view) {
+//        System.out.println("wayat");
+//        Intent imageTakeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        System.out.println("wayat");
+//        System.out.println("wayatKEY: " + keyOfOpenObject);
+//        if (imageTakeIntent.resolveActivity(getPackageManager()) != null) {
+//            startActivityForResult(imageTakeIntent, REQUEST_IMAGE_CAPTURE);
+//        }
+//        else{
+//            System.out.println("wayat not working");
+//        }
+//
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//
+//
+//
+//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+//            Bundle extras = data.getExtras();
+//            Bitmap imageBitmap = (Bitmap) extras.get("data");
+//
+//            // Need to set image of Object here to object.
+//            // Any way to know which object is currently open?
+//
+//            System.out.println("Crash Check 1");
+//
+//            // newObj is a nullpointer, We need to track which object is open in the dialog, but how???????
+//            //newObj = new Object_assoc();
+//
+//
+//            //System.out.println("ObjName: " + newObj.getName()+ "ObjDesc" + newObj.getDesc());
+//
+//            System.out.println("Crash Check 2");
+//            System.out.println("Current key: " + keyOfOpenObject);
+//            //newObj = palaceClicked.getObjectByKey(keyOfOpenObject);
+//
+//            System.out.println("Crash Check 2.5 ");
+//
+//            newObj.setO_memory(imageBitmap );
+//
+//            System.out.println("Crash Check 3");
+//
+//            setContentView(R.layout.view_existing_obj_pop_up);
+//
+//            System.out.println("Crash Check 4");
+//
+//            final ImageView mImageView = findViewById(R.id.clickedObjImage);
+//
+//            //System.out.println("This one ACTIVITY");
+//            // Write object to Palace File
+//            listOfMyPalaces.writePalacesFile(MyPalaceDetail.this);
+//
+//            // Set image
+//            mImageView.setImageBitmap(imageBitmap);
+//
+//            // Sets the current view back to the palace detail(Unsuccessful though)
+//            //setContentView(R.layout.activity_my_palace_detail);
+//            // Resets the Dialog to include the image that has been taken with the camera
+//
+//            //init();
+//            //initDraggingListening();
+//
+//
+//
+//        }
+//    }
