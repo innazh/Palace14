@@ -1,10 +1,12 @@
 package memorypalace.palace14.classes;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,6 +17,7 @@ public class RouteListAdapter extends BaseAdapter{
 
         public class ViewHolder {
             TextView textName;
+            ImageView iconOfTheFirstObject;
         }
 
         private List<Route> routeList;
@@ -54,6 +57,7 @@ public class RouteListAdapter extends BaseAdapter{
 
                 //Get the elements by ID
                 viewHolder.textName = rowView.findViewById(R.id.rLName);
+                viewHolder.iconOfTheFirstObject = rowView.findViewById(R.id.rLIcon);
 
                 rowView.setTag(viewHolder);
             } else {
@@ -61,6 +65,24 @@ public class RouteListAdapter extends BaseAdapter{
             }
             // here setting up names and images
             viewHolder.textName.setText(routeList.get(position).getName()); //+""
+
+            // get img name of the first object in the route list
+            String imageName = routeList.get(position).getObject(0).getIcon();
+
+            switch(imageName){
+                case "barstool":
+                    viewHolder.iconOfTheFirstObject.setImageResource(R.drawable.barstool);
+                    break;
+                case "bookcase":
+                    viewHolder.iconOfTheFirstObject.setImageResource(R.drawable.bookcase);
+                    break;
+                case "diningset":
+                    viewHolder.iconOfTheFirstObject.setImageResource(R.drawable.diningset);
+                    break;
+                case "stool":
+                    viewHolder.iconOfTheFirstObject.setImageResource(R.drawable.stool);
+                    break;
+            }
 
             return rowView;
         }

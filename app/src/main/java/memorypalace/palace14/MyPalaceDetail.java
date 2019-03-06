@@ -133,6 +133,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                 bundle.putInt("position", palacePosition);
 
                 intent.putExtra("list", bundle);
+                finish();
                 startActivity(intent);
             }
         });
@@ -515,6 +516,7 @@ public class MyPalaceDetail extends AppCompatActivity {
                     bundle.putInt("position", palacePosition);
 
                     intent.putExtra("list", bundle);
+                    finish();
                     startActivity(intent);
 
                     return true;

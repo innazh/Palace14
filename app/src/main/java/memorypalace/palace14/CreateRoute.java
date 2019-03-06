@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import memorypalace.palace14.classes.MyAdapter;
@@ -31,7 +32,7 @@ public class CreateRoute extends AppCompatActivity {
     private EditText routeNameET;
     private ObjectListAdapter adapter;
     private int palacePosition;
-    private Queue<Object_assoc> selectedObjects;
+    private List<Object_assoc> selectedObjects;
     private Button createRouteBtn;
 
     @Override
@@ -43,16 +44,62 @@ public class CreateRoute extends AppCompatActivity {
         createRouteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Route route = new Route(routeNameET.getText().toString());
-                System.out.println("EWFWEFWEFWEFEF");
-                for(int i=0; i < selectedObjects.size(); i++){
-                    //Retrieves and removes the head of this queue, or returns null if this queue is empty.
-                    route.addObject(selectedObjects.poll());
-                }
 
-                currentPalace.addRoute(route);
-                listOfMyPalaces.writePalacesFile(CreateRoute.this);
-                Toast.makeText(getApplicationContext(), "The route " + routeNameET.getText().toString() + " is saved!", Toast.LENGTH_SHORT);
+                if(!routeNameET.getText().toString().matches("")) {
+                    //Check if route with that name already exists
+                    boolean flag=false;
+                    for(int k=0; k<currentPalace.getRouteListSize() && !flag;k++) {
+                        if(routeNameET.getText().toString().compareTo(currentPalace.getRoute(k).getName())==0)
+                            flag=true;
+                    }
+
+                    if(!flag) {
+                        //Check if any objects were selected:
+                        if(!selectedObjects.isEmpty()) {
+
+                            Route route = new Route(routeNameET.getText().toString());
+
+                            //fix
+                            for (int i = 0; i < selectedObjects.size(); i++) {
+                                //Retrieves and removes the head of this queue, or returns null if this queue is empty.
+                                route.addObject(selectedObjects.get(i));
+                            }
+
+                            currentPalace.addRoute(route);
+
+                            //Reset the checkboxes in objects
+                            for (int j = 0; j < currentPalace.getObjectListSize(); j++) {
+                                currentPalace.getObject(j).setSelected(false);
+                            }
+
+                            listOfMyPalaces.writePalacesFile(CreateRoute.this);
+                            Toast.makeText(CreateRoute.this, "The route " + routeNameET.getText().toString() + " is saved!", Toast.LENGTH_SHORT).show();
+
+                            //Go back to viewing my palace Detail
+                            Intent intent = new Intent(CreateRoute.this, MyPalaceDetail.class);
+
+                            //Create a bundle to pass a PalaceList as an extra to the new activity
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("palaceList", listOfMyPalaces);
+
+                            //Pass in the position of a clicked palace
+                            bundle.putInt("position", palacePosition);
+
+                            intent.putExtra("list", bundle);
+                            finish();
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(CreateRoute.this, "Please select a number of objects in sequence", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(CreateRoute.this, "A route with that name already exists, please enter a different name", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(CreateRoute.this, "Please type in the route name", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -83,9 +130,8 @@ public class CreateRoute extends AppCompatActivity {
             //Creates an adapter and attaches it to the list object -> makes the list
             final ArrayList<Object_assoc> objects = currentPalace.getObjectList();
             adapter = new ObjectListAdapter(objects, getApplicationContext(), getLayoutInflater());
-            //objectsListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
             objectsListView.setAdapter(adapter);
-            System.out.println("ONE CHECK");
 
             //OnClick - add an object to the route queue
             objectsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -93,23 +139,23 @@ public class CreateRoute extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Object_assoc one = objects.get(position);
 
-                    if (one.isSelected())
+                    if (one.isSelected()) {
                         one.setSelected(false);
-
-                    else
+                        if(selectedObjects.contains(currentPalace.getObject(position))) //probs don't need that line
+                            selectedObjects.remove(currentPalace.getObject(position));
+                    }
+                    else {
                         one.setSelected(true);
+                        selectedObjects.add(currentPalace.getObject(position));
+                    }
 
                     objects.set(position, one);
 
                     //now update adapter
                     adapter.updateRecords(objects);
-                    //Later on: make sure that when the box is checked and them unchecked the object is removed from the route list
-                    selectedObjects.add(currentPalace.getObject(position));
+                    //System.out.println(selectedObjects);
                 }
             });
-
-            Intent RouteIntent = new Intent(CreateRoute.this,ViewRoute.class );
-
         }
     }
 
@@ -146,8 +192,17 @@ public class CreateRoute extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(CreateRoute.this, MyPalaceDetail.class);
+
+            //Create a bundle to pass a PalaceList as an extra to the new activity
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("palaceList", listOfMyPalaces);
+
+            //Pass in the position of a clicked palace
+            bundle.putInt("position", palacePosition);
+
+            intent.putExtra("list", bundle);
             finish();
-            Intent intent = new Intent(CreateRoute.this, ViewPalaceList.class);
             startActivity(intent);
 
         }

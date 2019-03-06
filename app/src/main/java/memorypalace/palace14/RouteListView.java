@@ -3,6 +3,7 @@ package memorypalace.palace14;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -54,10 +55,46 @@ public class RouteListView extends AppCompatActivity {
             routeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    selectedObjects.add(currentPalace.getObject(position));
-//                    System.out.println(selectedObjects);
+                    Intent intent = new Intent(RouteListView.this, ViewRoute.class);
+
+                    //Create a bundle to pass a PalaceList as an extra to the new activity
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("palaceList", listOfMyPalaces);
+                    //Pass in the position of a current palace
+                    bundle.putInt("palacePosition", palacePosition);
+                    //Pass in the position of selected route
+                    bundle.putInt("routePosition", position);
+                    intent.putExtras(bundle);
+
+                    finish();//not sure if should finish the activity.
+                    startActivity(intent);
                 }
             });
         }
     }
+
+    //Back button.
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(RouteListView.this, MyPalaceDetail.class);
+
+            //Create a bundle to pass a PalaceList as an extra to the new activity
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("palaceList", listOfMyPalaces);
+
+            //Pass in the position of a clicked palace
+            bundle.putInt("position", palacePosition);
+
+            intent.putExtra("list", bundle);
+            finish();
+            startActivity(intent);
+        }
+        return true;
+    }
 }
+
+
+
+
+

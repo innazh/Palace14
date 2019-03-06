@@ -46,6 +46,11 @@ public class Object_assoc implements Serializable {
         this.o_Ycoordinate = obj.o_Ycoordinate;
     }
 
+    @Override
+    public String toString(){
+        return "Object name: " + this.o_name + ", Object icon: " + this.o_imgName;
+    }
+
     public String getView_tag(){ return this.view_tag;}
     //Getters
     public String getName(){
