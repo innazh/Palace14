@@ -55,7 +55,7 @@ public class RouteListView extends AppCompatActivity {
             routeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(RouteListView.this, ViewRoute.class);
+                    Intent intent = new Intent(RouteListView.this, routeSelector.class);
 
                     //Create a bundle to pass a PalaceList as an extra to the new activity
                     Bundle bundle = new Bundle();

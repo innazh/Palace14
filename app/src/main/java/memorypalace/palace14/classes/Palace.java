@@ -1,6 +1,7 @@
 package memorypalace.palace14.classes;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,8 +34,22 @@ public class Palace implements Serializable {
         this.objectList.remove(position);
     }
 
-    public void removeRoute(int position){
-        this.routeList.remove(position);
+    public boolean removeRoute(int position,Context context){
+
+        // Remove the palace at position from the arrayList of Palaces
+        boolean result =true;
+        if(!routeList.isEmpty()) {
+            String deletedRouteName = this.routeList.get(position).getName();
+            this.routeList.remove(position);
+
+            // Toast the name of the Route deleted
+            //Output the path where the file was saved
+            Toast.makeText(context, "Palace " + deletedRouteName + " was successfully deleted", Toast.LENGTH_LONG).show();
+        }
+        else result=false;
+
+        return result;
+
     }
 
     //Returns the position of the object on the objectList

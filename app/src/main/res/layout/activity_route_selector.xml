@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/traverse_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="76dp"
+        android:text="Traverse Route"
+        app:layout_constraintBottom_toTopOf="@+id/view_entire_route"
+        app:layout_constraintStart_toStartOf="@+id/view_entire_route" />
+
+    <Button
+        android:id="@+id/view_entire_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="308dp"
+        android:text="View Entire Route"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/delete_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="9dp"
+        android:text="Delete Route"
+        app:layout_constraintEnd_toEndOf="@+id/view_entire_route"
+        app:layout_constraintTop_toBottomOf="@+id/view_entire_route" />
+</android.support.constraint.ConstraintLayout>
