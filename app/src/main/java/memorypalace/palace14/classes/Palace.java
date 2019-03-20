@@ -44,7 +44,7 @@ public class Palace implements Serializable {
 
             // Toast the name of the Route deleted
             //Output the path where the file was saved
-            Toast.makeText(context, "Palace " + deletedRouteName + " was successfully deleted", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Route " + deletedRouteName + " was successfully deleted", Toast.LENGTH_LONG).show();
         }
         else result=false;
 

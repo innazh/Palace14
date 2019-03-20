@@ -88,8 +88,13 @@ public class routeSelector  extends AppCompatActivity {
                 bundle.putInt("routePosition", routePosition);
                 intent.putExtras(bundle);
 
+
                 finish();
                 startActivity(intent);*/
+
+
+
+
                 final Dialog dialog;
                 dialog = new AlertDialog.Builder(routeSelector.this).setMessage(
                         "Are you sure you want to delete " + listOfMyPalaces.getPalace(palacePosition).getRoute(routePosition).getName() + " ?")
@@ -102,7 +107,20 @@ public class routeSelector  extends AppCompatActivity {
                                         // Save the state
                                         listOfMyPalaces.writePalacesFile(getApplicationContext());
                                         finish();
-                                        startActivity(new Intent(routeSelector.this, RouteListView.class));
+
+                                        Intent intent = new Intent(routeSelector.this, RouteListView.class);
+
+                                        //Create a bundle to pass a PalaceList as an extra to the new activity
+                                        Bundle bundle = new Bundle();
+                                        bundle.putSerializable("palaceList", listOfMyPalaces);
+
+                                        //Pass in the position of a clicked palace
+                                        bundle.putInt("position", palacePosition);
+
+                                        intent.putExtra("list", bundle);
+
+
+                                        startActivity(intent);
                                     }
                                 })
                         .setNegativeButton("No",
