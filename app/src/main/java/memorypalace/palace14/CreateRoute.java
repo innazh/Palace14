@@ -65,8 +65,9 @@ public class CreateRoute extends AppCompatActivity implements ObjectListAdapter.
                     if (!flag) {
                         //Check if any objects were selected:
                         if (!selectedObjects.isEmpty()) {
-                            if(selectedObjects.size() != objects.size()) {
+                            if(selectedObjects.size() == objects.size()) {
                                 System.out.println("Selected: " + selectedObjects.size() + "Total oBj: " + objects.size());
+                                System.out.println("changeCheck");
                                 Route route = new Route(routeNameET.getText().toString());
 
                                 //Go through all the objects, if selected -> put on the list
@@ -160,7 +161,7 @@ public class CreateRoute extends AppCompatActivity implements ObjectListAdapter.
                                                         }
                                                         System.out.println(selectedObjectsIdx);
                                                         System.out.println(selectedObjects);
-
+                                                        System.out.println("changeCheck 1");
                                                         currentPalace.addRoute(route);
 
                                                         listOfMyPalaces.writePalacesFile(CreateRoute.this);
