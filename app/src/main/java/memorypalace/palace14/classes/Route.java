@@ -2,12 +2,12 @@ package memorypalace.palace14.classes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Route implements Serializable {
     private String name;
     private ArrayList<Object_assoc> objectList;
 
-    //Look into it, maybe will have to add another parameter
     public Route(String name){
 
         this.name = name;

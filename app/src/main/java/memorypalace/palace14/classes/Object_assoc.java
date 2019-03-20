@@ -48,7 +48,7 @@ public class Object_assoc implements Serializable {
 
     @Override
     public String toString(){
-        return "Object name: " + this.o_name + ", Object icon: " + this.o_imgName;
+        return "Object name: " + this.o_name + ", Object icon: " + this.o_imgName + ", isSelected= " + this.isSelected;
     }
 
     public String getView_tag(){ return this.view_tag;}
@@ -73,14 +73,6 @@ public class Object_assoc implements Serializable {
         return o_Ycoordinate;
     }
 
-    public float getO_initYcoordinate() {
-        return o_initYcoordinate;
-    }
-
-    public float getO_initXcoordinate() {
-        return o_initXcoordinate;
-    }
-
     public Bitmap getMemory(){ return this.o_memory; }
 
     public boolean isSelected() {
@@ -103,14 +95,6 @@ public class Object_assoc implements Serializable {
 
     public void setO_Ycoordinate(float o_Ycoordinate) {
         this.o_Ycoordinate = o_Ycoordinate;
-    }
-
-    public void setO_initXcoordinate(float o_initXcoordinate) {
-        this.o_initXcoordinate = o_initXcoordinate;
-    }
-
-    public void setO_initYcoordinate(float o_initYcoordinate) {
-        this.o_initYcoordinate = o_initYcoordinate;
     }
 
     public void setO_memory(Bitmap memory){

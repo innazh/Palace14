@@ -54,7 +54,7 @@ public class ViewRoute extends AppCompatActivity {
 
         //Now, we need to iterate through all of our objects and create the layourInflators for them.
         ArrayList<Object_assoc> data = listOfMyPalaces.getPalace(palacePosition).getRoute(routePosition).getObjectList();
-        for (int i=0; i<data.size(); i++) {
+        for (int i=data.size()-1; i>=0; i--) {
             LayoutInflater inflate = (LayoutInflater) ViewRoute.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final View containerView = inflate.inflate(R.layout.view_route_custom_object_layout, null);
             ImageView objectIcon = containerView.findViewById(R.id.objectIcon);
