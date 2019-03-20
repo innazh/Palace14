@@ -1,7 +1,10 @@
 package memorypalace.palace14;
 
+import android.app.Dialog;
 import android.app.LauncherActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -62,59 +65,131 @@ public class CreateRoute extends AppCompatActivity implements ObjectListAdapter.
                     if (!flag) {
                         //Check if any objects were selected:
                         if (!selectedObjects.isEmpty()) {
+                            if(selectedObjects.size() != objects.size()) {
+                                System.out.println("Selected: " + selectedObjects.size() + "Total oBj: " + objects.size());
+                                Route route = new Route(routeNameET.getText().toString());
 
-                            Route route = new Route(routeNameET.getText().toString());
-
-                            //Go through all the objects, if selected -> put on the list
-                            for (int i = 0; i < objects.size(); i++) {
-                                if (objects.get(i).isSelected()) {
-                                    //reset the checkboxes
-                                    objects.get(i).setSelected(false);
-                                }
-                            }
-
-                            //Sort small to big
-                            int temp;
-                            Object_assoc temp2;
-                            for (int i = 0; i < selectedObjectsIdx.size(); i++) {
-                                for (int j = 1; j < (selectedObjectsIdx.size() - i); j++) {
-                                    if (selectedObjectsIdx.get(j - 1) > selectedObjectsIdx.get(j)) {
-                                        //swap elements
-                                        temp = selectedObjectsIdx.get(j - 1);
-                                        selectedObjectsIdx.set(j - 1, selectedObjectsIdx.get(j));
-                                        selectedObjectsIdx.set(j, temp);
-
-                                        temp2 = selectedObjects.get(j - 1);
-                                        selectedObjects.set(j - 1, selectedObjects.get(j));
-                                        selectedObjects.set(j, temp2);
+                                //Go through all the objects, if selected -> put on the list
+                                for (int i = 0; i < objects.size(); i++) {
+                                    if (objects.get(i).isSelected()) {
+                                        //reset the checkboxes
+                                        objects.get(i).setSelected(false);
                                     }
-
                                 }
+
+                                //Sort small to big
+                                int temp;
+                                Object_assoc temp2;
+                                for (int i = 0; i < selectedObjectsIdx.size(); i++) {
+                                    for (int j = 1; j < (selectedObjectsIdx.size() - i); j++) {
+                                        if (selectedObjectsIdx.get(j - 1) > selectedObjectsIdx.get(j)) {
+                                            //swap elements
+                                            temp = selectedObjectsIdx.get(j - 1);
+                                            selectedObjectsIdx.set(j - 1, selectedObjectsIdx.get(j));
+                                            selectedObjectsIdx.set(j, temp);
+
+                                            temp2 = selectedObjects.get(j - 1);
+                                            selectedObjects.set(j - 1, selectedObjects.get(j));
+                                            selectedObjects.set(j, temp2);
+                                        }
+
+                                    }
+                                }
+                                for (int i = 0; i < selectedObjects.size(); i++) {
+                                    route.addObject(selectedObjects.get(i));
+                                }
+                                System.out.println(selectedObjectsIdx);
+                                System.out.println(selectedObjects);
+
+                                currentPalace.addRoute(route);
+
+                                listOfMyPalaces.writePalacesFile(CreateRoute.this);
+                                Toast.makeText(CreateRoute.this, "The route " + routeNameET.getText().toString() + " is saved!", Toast.LENGTH_SHORT).show();
+
+                                //Go back to viewing my palace Detail
+                                Intent intent = new Intent(CreateRoute.this, MyPalaceDetail.class);
+
+                                //Create a bundle to pass a PalaceList as an extra to the new activity
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("palaceList", listOfMyPalaces);
+
+                                //Pass in the position of a clicked palace
+                                bundle.putInt("position", palacePosition);
+
+                                intent.putExtra("list", bundle);
+                                finish();
+                                startActivity(intent);
+                            }else{
+                                final Dialog dialog;
+                                dialog = new AlertDialog.Builder(CreateRoute.this).setMessage(
+                                        "The route " + routeNameET.getText().toString() + " does not have all objects, are you sure you want to create it?")
+                                        .setCancelable(false)
+                                        .setPositiveButton("Yes",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        Route route = new Route(routeNameET.getText().toString());
+
+                                                        //Go through all the objects, if selected -> put on the list
+                                                        for (int i = 0; i < objects.size(); i++) {
+                                                            if (objects.get(i).isSelected()) {
+                                                                //reset the checkboxes
+                                                                objects.get(i).setSelected(false);
+                                                            }
+                                                        }
+
+                                                        //Sort small to big
+                                                        int temp;
+                                                        Object_assoc temp2;
+                                                        for (int i = 0; i < selectedObjectsIdx.size(); i++) {
+                                                            for (int j = 1; j < (selectedObjectsIdx.size() - i); j++) {
+                                                                if (selectedObjectsIdx.get(j - 1) > selectedObjectsIdx.get(j)) {
+                                                                    //swap elements
+                                                                    temp = selectedObjectsIdx.get(j - 1);
+                                                                    selectedObjectsIdx.set(j - 1, selectedObjectsIdx.get(j));
+                                                                    selectedObjectsIdx.set(j, temp);
+
+                                                                    temp2 = selectedObjects.get(j - 1);
+                                                                    selectedObjects.set(j - 1, selectedObjects.get(j));
+                                                                    selectedObjects.set(j, temp2);
+                                                                }
+
+                                                            }
+                                                        }
+                                                        for (int i = 0; i < selectedObjects.size(); i++) {
+                                                            route.addObject(selectedObjects.get(i));
+                                                        }
+                                                        System.out.println(selectedObjectsIdx);
+                                                        System.out.println(selectedObjects);
+
+                                                        currentPalace.addRoute(route);
+
+                                                        listOfMyPalaces.writePalacesFile(CreateRoute.this);
+                                                        Toast.makeText(CreateRoute.this, "The route " + routeNameET.getText().toString() + " is saved!", Toast.LENGTH_SHORT).show();
+
+                                                        //Go back to viewing my palace Detail
+                                                        Intent intent = new Intent(CreateRoute.this, MyPalaceDetail.class);
+
+                                                        //Create a bundle to pass a PalaceList as an extra to the new activity
+                                                        Bundle bundle = new Bundle();
+                                                        bundle.putSerializable("palaceList", listOfMyPalaces);
+
+                                                        //Pass in the position of a clicked palace
+                                                        bundle.putInt("position", palacePosition);
+
+                                                        intent.putExtra("list", bundle);
+                                                        finish();
+                                                        startActivity(intent);
+                                                    }
+                                                })
+                                        .setNegativeButton("No",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                }).create();
+                                dialog.show();
                             }
-                            for (int i = 0; i < selectedObjects.size(); i++) {
-                                route.addObject(selectedObjects.get(i));
-                            }
-                            System.out.println(selectedObjectsIdx);
-                            System.out.println(selectedObjects);
 
-                            currentPalace.addRoute(route);
-
-                            listOfMyPalaces.writePalacesFile(CreateRoute.this);
-                            Toast.makeText(CreateRoute.this, "The route " + routeNameET.getText().toString() + " is saved!", Toast.LENGTH_SHORT).show();
-
-                            //Go back to viewing my palace Detail
-                            Intent intent = new Intent(CreateRoute.this, MyPalaceDetail.class);
-
-                            //Create a bundle to pass a PalaceList as an extra to the new activity
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("palaceList", listOfMyPalaces);
-
-                            //Pass in the position of a clicked palace
-                            bundle.putInt("position", palacePosition);
-
-                            intent.putExtra("list", bundle);
-                            finish();
-                            startActivity(intent);
                         } else {
                             Toast.makeText(CreateRoute.this, "Please select a number of objects in sequence", Toast.LENGTH_SHORT).show();
                         }
