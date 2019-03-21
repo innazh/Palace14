@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/crTitle"
+    <EditText
+        android:id="@+id/erTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="24dp"
@@ -14,49 +13,26 @@
         android:text=""
         android:textSize="24sp"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="@+id/routeName"
+        app:layout_constraintStart_toStartOf="@+id/viewEntireRouteListID"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/routeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="24dp"
-        android:paddingLeft="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Route Name"
-        app:layout_constraintStart_toStartOf="@+id/viewObjectListID"
-        app:layout_constraintTop_toBottomOf="@+id/crTitle" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/viewObjectListID"
+        android:id="@+id/viewEntireRouteListID"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/routeName" />
-
-    <TextView
-        android:id="@+id/emptyObjectsTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="There's nothing here yet."
-        android:textSize="15sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/erTitle" />
 
     <Button
-        android:id="@+id/createRouteBtn"
+        android:id="@+id/reorderRouteBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Reorder Route"
-        app:layout_constraintBottom_toBottomOf="@+id/viewObjectListID"
+        app:layout_constraintBottom_toBottomOf="@+id/viewEntireRouteListID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

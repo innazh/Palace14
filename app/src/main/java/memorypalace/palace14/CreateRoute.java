@@ -1,7 +1,6 @@
 package memorypalace.palace14;
 
 import android.app.Dialog;
-import android.app.LauncherActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -12,10 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +21,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import memorypalace.palace14.classes.MyAdapter;
 import memorypalace.palace14.classes.ObjectListAdapter;
 import memorypalace.palace14.classes.Object_assoc;
 import memorypalace.palace14.classes.Palace;

@@ -10,7 +10,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +22,8 @@ import memorypalace.palace14.classes.Object_assoc;
 import memorypalace.palace14.classes.Palace;
 import memorypalace.palace14.classes.PalaceList;
 import memorypalace.palace14.classes.Route;
-import memorypalace.palace14.classes.RouteListAdapter;
 
-public class ViewEntireRouteAsList extends AppCompatActivity {
+public class ViewEntireRouteAsList extends AppCompatActivity implements ObjectListAdapter.ItemClickCallback {
 
     private PalaceList listOfMyPalaces;
     private int palacePosition;
@@ -47,8 +45,8 @@ public class ViewEntireRouteAsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_entire_route);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_route);
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_create_route);
         init();
 
         reorderBtn.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +134,7 @@ public class ViewEntireRouteAsList extends AppCompatActivity {
     public void init(){
         Intent intent = getIntent();
 
-        RouteName = findViewById(R.id.crTitle);
+        RouteName = findViewById(R.id.erTitle);
 
         //Get data from the received intent:
         Bundle bundle = intent.getExtras();
@@ -148,10 +146,9 @@ public class ViewEntireRouteAsList extends AppCompatActivity {
         selectedObjects = new LinkedList<Object_assoc>();
         selectedObjectsIdx = new LinkedList<Integer>();
         //Find the list view in XML file and put it in our local variable
-        objectsListView = findViewById(R.id.viewObjectListID);
-        emptyObjectList = findViewById(R.id.emptyObjectsTV);
-        reorderBtn = findViewById(R.id.createRouteBtn);
-        routeNameET = findViewById(R.id.routeName);
+        objectsListView = findViewById(R.id.viewEntireRouteListID);
+        reorderBtn = findViewById(R.id.reorderRouteBtn);
+        //routeNameET = findViewById(R.id.entireRouteViewName);
         //Get position of the palace clicked on the list
         currentPalace = listOfMyPalaces.getPalace(palacePosition);
 
