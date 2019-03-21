@@ -33,6 +33,7 @@
         <activity android:name=".RouteListView"></activity>
         <activity android:name=".ViewRoute"></activity>
         <activity android:name=".routeSelector"></activity>
+        <activity android:name=".ViewEntireRouteAsList"></activity>
     </application>
 
 </manifest>

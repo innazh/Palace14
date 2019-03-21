@@ -75,25 +75,7 @@ public class routeSelector  extends AppCompatActivity {
         });
 
         deleteRoute.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {/*
-                Intent intent = new Intent(routeSelector.this, RouteListView.class);
-
-
-                //Create a bundle to pass a PalaceList as an extra to the new activity
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("palaceList", listOfMyPalaces);
-                //Pass in the position of a current palace
-                bundle.putInt("palacePosition", palacePosition);
-                //Pass in the position of selected route
-                bundle.putInt("routePosition", routePosition);
-                intent.putExtras(bundle);
-
-
-                finish();
-                startActivity(intent);*/
-
-
-
+            public void onClick(View v) {
 
                 final Dialog dialog;
                 dialog = new AlertDialog.Builder(routeSelector.this).setMessage(
@@ -135,38 +117,7 @@ public class routeSelector  extends AppCompatActivity {
         });
 
         }
-   /* @Override
-    protected Dialog onCreateDialog(int id) {
-        final Dialog dialog;
-        dialog = new AlertDialog.Builder(this).setMessage(
-                "Are you sure you want to delete " + listOfMyPalaces.getPalace(palacePosition).getRoute(routePosition).getName() + " ?")
-                .setCancelable(false)
-                .setPositiveButton("Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                System.out.println(listOfMyPalaces + "       " + palacePosition);
-                                listOfMyPalaces.getPalace(palacePosition).removeRoute(routePosition,getApplicationContext());
-                                // Save the state
-                                listOfMyPalaces.writePalacesFile(getApplicationContext());
-                                finish();
-                                startActivity(new Intent(routeSelector.this, ViewPalaceList.class));
-                            }
-                        })
-                .setNegativeButton("No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-
-                            }
-                        }).create();
-        return dialog;
-
-    }*/
-
 
     }
 
-   /* public void init(){
-
-    }*/
 
