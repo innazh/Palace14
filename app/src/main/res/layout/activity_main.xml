@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bkgrnd"
+    android:background="@drawable/tanpp"
     tools:context="memorypalace.palace14.MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
@@ -13,12 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="240dp"
-        android:fontFamily="@font/berkleyb"
-        android:text="Choose Palace Template"
-        android:visibility="visible"
         android:background="@color/leather"
-        android:textAllCaps="false"
+        android:fontFamily="@font/berkleyb"
         android:padding="3dp"
+        android:text="Choose Palace Template"
+        android:textAllCaps="false"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,4 +68,17 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/choosePalace"
         app:layout_constraintStart_toStartOf="@+id/choosePalace" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:text="Mind Palace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/aclonica"
+        android:textSize="50dp"
+        android:textColor="@color/colorBlack"/>
 </android.support.constraint.ConstraintLayout>

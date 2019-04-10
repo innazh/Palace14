@@ -2,6 +2,8 @@ package memorypalace.palace14;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -129,6 +131,31 @@ public class ViewEntireRouteAsList extends AppCompatActivity implements ObjectLi
         //ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
         //itemTouchHelper.attachToRecyclerView(objectsListView);
         init();
+        /*final Toast toast = Toast.makeText(getApplicationContext(), "Drag the objects to reorder the route, to your desired order", Toast.LENGTH_LONG);
+        toast.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                toast.cancel();
+            }
+        }, 10000000); // Change to what you want*/
+        int toastDuration = 9000; // in MilliSeconds
+        final Toast mToast = Toast.makeText(this, "Drag the objects to reorder the route, to your desired order", Toast.LENGTH_LONG);
+        CountDownTimer countDownTimer;
+        countDownTimer = new CountDownTimer(toastDuration, 1000) {
+            public void onTick(long millisUntilFinished) {
+                mToast.show();
+            }
+
+            public void onFinish() {
+                mToast.cancel();
+            }
+        };
+
+        mToast.show();
+        countDownTimer.start();
     }
 
     public void init(){

@@ -17,8 +17,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="93dp"
         android:paddingRight="52dp"
-        android:text=""
         android:textSize="25dp"
+        android:textColor="@color/colorBlack"
         android:color="@color/colorBlack"
         android:fontFamily="@font/berkleyb"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayoutPalaceDetail"
@@ -54,7 +54,7 @@
             android:layout_height="302dp"
             android:layout_marginLeft="48dp"
             android:elevation="2dp"
-            android:background="@drawable/borderplswork"
+            android:background="@drawable/rounded_corner"
             app:srcCompat="@mipmap/ic_launcher"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="90dp" />
@@ -76,7 +76,7 @@
             android:layout_height="50dp"
             android:layout_margin="8dp"
             android:elevation="3dp"
-            android:background="@drawable/rounded_corner"
+            android:background="@drawable/borderplswork"
             android:layout_below="@id/objectStool"
             app:srcCompat="@drawable/bookcase" />
 
@@ -87,6 +87,7 @@
             android:layout_height="50dp"
             android:layout_margin="8dp"
             android:elevation="3dp"
+            android:background="@drawable/borderplswork"
             android:layout_below="@id/objectBookShelf"
             app:srcCompat="@drawable/barstool" />
 
@@ -97,6 +98,7 @@
             android:layout_height="100px"
             android:layout_margin="8dp"
             android:elevation="3dp"
+            android:background="@drawable/borderplswork"
             android:layout_below="@id/objectBarstool"
             app:srcCompat="@drawable/diningset" />
 
@@ -107,7 +109,23 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="65dp"
-            android:text="View Route List" />
+            android:text="View Routes"
+            android:background="@color/leather"
+            android:padding="3dp"
+            android:color="@color/leather"
+            android:fontFamily="@font/berkleyb"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="297dp"
+            android:layout_height="136dp"
+            android:layout_alignTop="@+id/objectBarstool"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="188dp"
+            android:text="Click on a object on the left sidebar, then click again on the floor plan to create a memory."
+            android:fontFamily="@font/berkley"
+            android:textColor="@color/colorBlack"/>
 
     </RelativeLayout>
 

@@ -19,6 +19,7 @@
         android:textSize="30sp"
         android:visibility="visible"
         android:fontFamily="@font/aclonica"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toStartOf="@+id/viewObjectListID"
         app:layout_constraintTop_toTopOf="parent" />
 

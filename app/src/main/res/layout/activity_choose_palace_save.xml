@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="memorypalace.palace14.ChoosePalaceSave"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="25dp"
+    android:background="@drawable/tanpp">
 
     <TextView
         android:id="@+id/palaceChoiceName"
@@ -16,7 +17,9 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorBlack"
+        android:fontFamily="@font/berkley"/>
 
     <Button
         android:id="@+id/createPalaceBtn"
@@ -29,7 +32,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.951"
-        app:layout_constraintStart_toEndOf="@+id/choosePalaceCancel" />
+        app:layout_constraintStart_toEndOf="@+id/choosePalaceCancel"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:padding="4dp"/>
 
     <ImageView
         android:id="@+id/palaceChoice"
@@ -48,7 +54,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.289"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/ic_launcher"
+        android:background="@drawable/rounded_corner"/>
     <!--android:layout_marginLeft="50dp"-->
     <!--android:layout_marginRight="50dp"-->
 
@@ -62,7 +69,10 @@
         android:layout_marginStart="32dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:padding="4dp"/>
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier3"

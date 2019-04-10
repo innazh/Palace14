@@ -11,9 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBlack"
         android:text="Please input the information that you want to associate with the object: "
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:fontFamily="@font/berkley"
+        />
 
     <EditText
         android:id="@+id/objectNameInput"
@@ -23,7 +25,8 @@
         android:layout_marginLeft="20dp"
         android:ems="10"
         android:hint="Title"
-        android:inputType="textPersonName">
+        android:inputType="textPersonName"
+        android:fontFamily="@font/berkley">
         <requestFocus/>
     </EditText>
 
@@ -35,7 +38,8 @@
         android:layout_marginLeft="20dp"
         android:ems="10"
         android:hint="Description"
-        android:inputType="textImeMultiLine" />
+        android:inputType="textImeMultiLine"
+        android:fontFamily="@font/berkley"/>
 
 
     <Button
@@ -44,7 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="Save" />
+        android:text="Save"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkley"/>
 
 
     <Button
@@ -53,7 +59,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="Cancel" />
+        android:text="Cancel"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkley"/>
 
 
 
