@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name your palace: "
+        android:fontFamily="@font/berkley"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText

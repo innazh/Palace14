@@ -8,8 +8,9 @@
 
     <item
         android:id="@+id/navigation_create_path"
-        android:icon="@drawable/ic_share_black_24dp"
-        android:title="@string/create_path" />
+        android:icon="@drawable/ic_path"
+        android:title="@string/create_path"
+        android:color="@color/white"/>
 
     <item
         android:id="@+id/navigation_rename_palace"

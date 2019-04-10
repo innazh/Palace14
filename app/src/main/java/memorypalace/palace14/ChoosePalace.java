@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class ChoosePalace extends AppCompatActivity {
+public class    ChoosePalace extends AppCompatActivity {
 
     ImageView image1, image2, image3, image4;
     TextView text1, text2, text3, text4;

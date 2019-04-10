@@ -55,6 +55,7 @@ public class MyPalaceDetail extends AppCompatActivity {
         //Sets up all the dragging and dropping functionality
         initDraggingListening();
 
+
       /*  homeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MyPalaceDetail.this, MainActivity.class);
@@ -339,6 +340,7 @@ public class MyPalaceDetail extends AppCompatActivity {
 
         mTextMessage = (TextView) findViewById(R.id.message);
 
+
         //Initialize the bottom navigation menu
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -350,6 +352,8 @@ public class MyPalaceDetail extends AppCompatActivity {
         palacePosition = bundle.getInt("position");
         //Get position of the palace clicked on the list
         palaceClicked = listOfMyPalaces.getPalace(palacePosition);
+
+        mTextMessage.setText(palaceClicked.getName());
 
         //Display the right blueprint on the screen
         int resImgID = getResources().getIdentifier(palaceClicked.getImageName(), "drawable", getPackageName());
@@ -499,15 +503,19 @@ public class MyPalaceDetail extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent intent;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
+                    intent = new Intent(MyPalaceDetail.this, MainActivity.class);
+                    finish();
+                    startActivity(intent);
                     return true;
 
                 case R.id.navigation_create_path:
 
                     mTextMessage.setText(R.string.create_path);
-                    Intent intent = new Intent(MyPalaceDetail.this, CreateRoute.class);
+                    intent = new Intent(MyPalaceDetail.this, CreateRoute.class);
                     //Create a bundle to pass a PalaceList as an extra to the new activity
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("palaceList", listOfMyPalaces);

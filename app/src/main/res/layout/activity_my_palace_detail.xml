@@ -6,26 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyPalaceDetail"
+    android:background="@drawable/tanpp"
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="93dp"
-        android:layout_marginLeft="52dp"
-        android:paddingRight="52dp"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="16dp"
-        android:text="@string/title_home"
+        android:layout_marginBottom="93dp"
+        android:paddingRight="52dp"
+        android:text=""
+        android:textSize="25dp"
+        android:color="@color/colorBlack"
+        android:fontFamily="@font/berkleyb"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayoutPalaceDetail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="?android:attr/windowBackground"
+        android:background="@drawable/navbkgrnd"
         app:layout_constraintBottom_toBottomOf="@+id/relativeLayoutPalaceDetail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -40,7 +45,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message">
+        app:layout_constraintTop_toBottomOf="@+id/message"
+        android:background="@drawable/background_border">
 
         <ImageView
             android:id="@+id/myPalaceImg"
@@ -48,6 +54,7 @@
             android:layout_height="302dp"
             android:layout_marginLeft="48dp"
             android:elevation="2dp"
+            android:background="@drawable/borderplswork"
             app:srcCompat="@mipmap/ic_launcher"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="90dp" />
@@ -59,6 +66,7 @@
             android:layout_height="50dp"
             android:layout_margin="8dp"
             android:elevation="3dp"
+            android:background="@drawable/borderplswork"
             app:srcCompat="@drawable/stool" />
 
         <ImageView
@@ -68,6 +76,7 @@
             android:layout_height="50dp"
             android:layout_margin="8dp"
             android:elevation="3dp"
+            android:background="@drawable/rounded_corner"
             android:layout_below="@id/objectStool"
             app:srcCompat="@drawable/bookcase" />
 

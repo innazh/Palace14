@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bkgrnd"
     tools:context="memorypalace.palace14.MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
@@ -12,31 +13,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="240dp"
-        android:text="Choose Palace"
+        android:fontFamily="@font/berkleyb"
+        android:text="Choose Palace Template"
         android:visibility="visible"
+        android:background="@color/leather"
+        android:textAllCaps="false"
+        android:padding="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="52dp"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:padding="3dp"
+        android:text="Instructions"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="@+id/palaceList"
+        app:layout_constraintTop_toBottomOf="@+id/choosePalace" />
+
+    <Button
         android:id="@+id/palaceList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="176dp"
-        android:text="View Palace List"
+        android:layout_marginBottom="172dp"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:padding="3dp"
+        android:text="View My Palaces"
+        android:textAllCaps="false"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buildPalace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Build Palace"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="56dp"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:padding="3dp"
+        android:text="Upload Floor Plan"
+        android:textAllCaps="false"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/choosePalace"
         app:layout_constraintStart_toStartOf="@+id/choosePalace" />

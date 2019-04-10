@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="memorypalace.palace14.ChoosePalace"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="25dp"
+    android:background="@drawable/tanpp">
 
 
     <TextView
@@ -14,9 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
         android:paddingLeft="8dp"
-        android:text="My palaces:"
+        android:text="Palaces: "
         android:textSize="30sp"
         android:visibility="visible"
+        android:fontFamily="@font/aclonica"
         app:layout_constraintStart_toStartOf="@+id/viewObjectListID"
         app:layout_constraintTop_toTopOf="parent" />
 
