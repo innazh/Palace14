@@ -16,7 +16,7 @@ import memorypalace.palace14.classes.Palace;
 import memorypalace.palace14.classes.PalaceList;
 
 public class MainActivity extends AppCompatActivity {
-    Button choosePalace, buildPalace, palaceList;
+    Button choosePalace, palaceList;
     private static final int DIALOG_REALLY_EXIT_ID = 0;
 
     @Override
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         choosePalace = findViewById(R.id.choosePalace);
-        buildPalace = findViewById(R.id.buildPalace);
+        //buildPalace = findViewById(R.id.buildPalace);
         palaceList = findViewById(R.id.palaceList);
 
         choosePalace.setOnClickListener(new View.OnClickListener() {
@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buildPalace.setOnClickListener(new View.OnClickListener() {
+        /*buildPalace.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BuildPalace.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         palaceList.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

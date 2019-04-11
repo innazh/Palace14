@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <!--<Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:text="Instructions"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="@+id/palaceList"
-        app:layout_constraintTop_toBottomOf="@+id/choosePalace" />
+        app:layout_constraintTop_toBottomOf="@+id/choosePalace" />-->
 
     <Button
         android:id="@+id/palaceList"
@@ -53,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+   <!-- <Button
         android:id="@+id/buildPalace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
         android:textAllCaps="false"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/choosePalace"
-        app:layout_constraintStart_toStartOf="@+id/choosePalace" />
+        app:layout_constraintStart_toStartOf="@+id/choosePalace" />-->
 
     <TextView
         android:id="@+id/textView2"
