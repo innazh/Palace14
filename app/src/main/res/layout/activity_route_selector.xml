@@ -8,40 +8,54 @@
 
     <Button
         android:id="@+id/traverse_route"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="76dp"
-        android:text="Traverse Route"
-        android:fontFamily="@font/berkleyb"
+        android:layout_marginTop="227dp"
         android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
         android:padding="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/view_entire_route"
-        app:layout_constraintStart_toStartOf="@+id/view_entire_route" />
+        android:text="Traverse Route"
+        app:layout_constraintEnd_toEndOf="@+id/view_entire_route"
+        app:layout_constraintStart_toStartOf="@+id/view_entire_route"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/view_entire_route"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="308dp"
-        android:text="View Entire Route"
+        android:layout_marginTop="16dp"
+        android:background="@color/leather"
         android:fontFamily="@font/berkleyb"
         android:padding="3dp"
-        android:background="@color/leather"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="View Entire Route"
+        app:layout_constraintEnd_toEndOf="@+id/delete_route"
+        app:layout_constraintStart_toStartOf="@+id/delete_route"
+        app:layout_constraintTop_toBottomOf="@+id/traverse_route" />
 
     <Button
         android:id="@+id/delete_route"
-        android:layout_width="117dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/leather"
         android:fontFamily="@font/berkleyb"
         android:padding="3dp"
         android:text="Delete Route"
-        app:layout_constraintEnd_toEndOf="@+id/view_entire_route"
+        app:layout_constraintEnd_toEndOf="@+id/routeSelectorBackBtn"
+        app:layout_constraintStart_toStartOf="@+id/routeSelectorBackBtn"
         app:layout_constraintTop_toBottomOf="@+id/view_entire_route" />
+
+    <Button
+        android:id="@+id/routeSelectorBackBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:padding="3dp"
+        android:text="To main menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_route" />
+
 </android.support.constraint.ConstraintLayout>

@@ -9,4 +9,15 @@
     app:cardUseCompatPadding="true"
     android:background="@drawable/tanpp">
 
+    <Button
+        android:id="@+id/viewRouteBackBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:padding="3dp"
+        android:text="Back to menu"
+        android:textAllCaps="false" />
 </RelativeLayout>

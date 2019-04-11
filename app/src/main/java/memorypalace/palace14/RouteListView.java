@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,12 +21,20 @@ public class RouteListView extends AppCompatActivity {
     private ListView routeListView;
     private TextView emptyRouteList;
     private RouteListAdapter routeListAdapter;
+    Button viewRouteListBackBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_list_view);
         init();
+        viewRouteListBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(RouteListView.this, MainActivity.class));
+            }
+        });
     }
 
     public void init(){
@@ -38,6 +47,7 @@ public class RouteListView extends AppCompatActivity {
         //Get position of the palace clicked on the list
         currentPalace = listOfMyPalaces.getPalace(palacePosition);
 
+        viewRouteListBackBtn = findViewById(R.id.viewRouteListBackBtn);
         emptyRouteList = findViewById(R.id.emptyRouteTV);
         routeListView = findViewById(R.id.viewRouteListID);
 

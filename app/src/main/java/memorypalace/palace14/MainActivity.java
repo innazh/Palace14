@@ -18,7 +18,6 @@ import memorypalace.palace14.classes.PalaceList;
 public class MainActivity extends AppCompatActivity {
     Button choosePalace, buildPalace, palaceList;
     private static final int DIALOG_REALLY_EXIT_ID = 0;
-    EditText exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

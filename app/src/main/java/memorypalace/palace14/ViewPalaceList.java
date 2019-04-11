@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,12 +22,14 @@ public class ViewPalaceList  extends AppCompatActivity {
     private ListView palaceListView;
     private MyAdapter adapter;
     private TextView emptyPalaceList;
+    private Button myPalaceListBackBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_palace_list);
 
+        myPalaceListBackBtn = findViewById(R.id.myPalaceListBackBtn);
         //Find the list view in XML file and put it in our local variable
         palaceListView = findViewById(R.id.viewObjectListID);
         emptyPalaceList = findViewById(R.id.emptyPalacesTV);
@@ -72,6 +75,13 @@ public class ViewPalaceList  extends AppCompatActivity {
                 }
             });
         }
+
+        myPalaceListBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 

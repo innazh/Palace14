@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/tanpp"
     tools:context="memorypalace.palace14.ChoosePalace"
-    tools:layout_editor_absoluteY="25dp"
-    android:background="@drawable/tanpp">
+    tools:layout_editor_absoluteY="25dp">
 
 
     <TextView
         android:id="@+id/crTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="24dp"
-        android:paddingLeft="16dp"
-        android:text="Select objects to create route"
-        android:textSize="24sp"
         android:fontFamily="@font/berkley"
+        android:paddingLeft="16dp"
+        android:paddingTop="24dp"
+        android:text="Select objects to create route"
         android:textColor="@color/colorBlack"
+        android:textSize="24sp"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/routeName"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,13 +27,13 @@
         android:id="@+id/routeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="24dp"
-        android:paddingLeft="24dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Route Name"
-        android:textColor="@color/colorBlack"
         android:fontFamily="@font/berkley"
+        android:hint="Route Name"
+        android:inputType="textPersonName"
+        android:paddingLeft="24dp"
+        android:paddingTop="24dp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toStartOf="@+id/viewObjectListID"
         app:layout_constraintTop_toBottomOf="@+id/crTitle" />
 
@@ -44,18 +44,20 @@
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/routeName" />
+        app:layout_constraintTop_toBottomOf="@+id/routeName"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/emptyObjectsTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/berkley"
         android:text="There's nothing here yet."
+        android:textColor="@color/colorBlack"
         android:textSize="15sp"
         android:visibility="invisible"
-        android:fontFamily="@font/berkley"
-        android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,12 +67,25 @@
         android:id="@+id/createRouteBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Create Route"
         android:background="@color/leather"
         android:fontFamily="@font/berkleyb"
+        android:text="Create Route"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/viewObjectListID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toRightOf="@id/createRouteBackBtn"
+        app:layout_constraintRight_toRightOf="parent" />
 
+
+    <Button
+        android:id="@+id/createRouteBackBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:text="To main menu"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/viewObjectListID"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/createRouteBtn" />
 
 </android.support.constraint.ConstraintLayout>

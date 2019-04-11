@@ -35,7 +35,7 @@ public class ViewEntireRouteAsList extends AppCompatActivity implements ObjectLi
     private ArrayList<Object_assoc> objects;
     private List<Object_assoc> selectedObjects;
     private List<Integer> selectedObjectsIdx;
-    private Button reorderBtn;
+    private Button reorderBtn, viewEntireRouteBackBtn;
     private RecyclerView objectsListView;
     private ObjectListAdapter adapter;
     private TextView emptyObjectList;
@@ -47,8 +47,6 @@ public class ViewEntireRouteAsList extends AppCompatActivity implements ObjectLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_entire_route);
 
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_create_route);
         init();
 
         reorderBtn.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +173,7 @@ public class ViewEntireRouteAsList extends AppCompatActivity implements ObjectLi
         //Find the list view in XML file and put it in our local variable
         objectsListView = findViewById(R.id.viewEntireRouteListID);
         reorderBtn = findViewById(R.id.reorderRouteBtn);
+        viewEntireRouteBackBtn = findViewById(R.id.viewEntireRouteBackBtn);
         //routeNameET = findViewById(R.id.entireRouteViewName);
         //Get position of the palace clicked on the list
         currentPalace = listOfMyPalaces.getPalace(palacePosition);
@@ -185,6 +184,25 @@ public class ViewEntireRouteAsList extends AppCompatActivity implements ObjectLi
         objectsListView.setLayoutManager(new LinearLayoutManager(this));
         objectsListView.setAdapter(adapter);
         adapter.setItemClickCallback(this); // Why is there a problem here?
+
+        viewEntireRouteBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewEntireRouteAsList.this, routeSelector.class);
+
+                //Create a bundle to pass a PalaceList as an extra to the new activity
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("palaceList", listOfMyPalaces);
+                //Pass in the position of a current palace
+                bundle.putInt("palacePosition", palacePosition);
+                //Pass in the position of selected route
+                bundle.putInt("routePosition", routePosition);
+                intent.putExtras(bundle);
+
+                finish();//not sure if should finish the activity.
+                startActivity(intent);
+            }
+        });
 
     }
 

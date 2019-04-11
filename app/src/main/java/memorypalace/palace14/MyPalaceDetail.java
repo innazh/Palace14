@@ -342,7 +342,7 @@ public class MyPalaceDetail extends AppCompatActivity {
 
 
         //Initialize the bottom navigation menu
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         final Intent intent = getIntent();
 

@@ -4,22 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="memorypalace.palace14.ChoosePalace"
-    tools:layout_editor_absoluteY="25dp"
-    android:background="@drawable/tanpp">
+    android:background="@drawable/tanpp"
+    tools:context="memorypalace.palace14.ViewPalaceList"
+    tools:layout_editor_absoluteY="25dp">
 
+
+    <Button
+        android:id="@+id/myPalaceListBackBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:padding="3dp"
+        android:text="To main menu"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/viewObjectListID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/crTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
+        android:fontFamily="@font/aclonica"
         android:paddingLeft="8dp"
         android:text="Palaces: "
+        android:textColor="@color/colorBlack"
         android:textSize="30sp"
         android:visibility="visible"
-        android:fontFamily="@font/aclonica"
-        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toStartOf="@+id/viewObjectListID"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +40,6 @@
         android:id="@+id/viewObjectListID"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="There's nothing here yet."
-        android:visibility="invisible"
         android:textSize="15sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

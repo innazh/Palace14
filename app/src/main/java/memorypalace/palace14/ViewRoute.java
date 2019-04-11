@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class ViewRoute extends AppCompatActivity {
     //XML
     private RelativeLayout relativeLayoutContainer;
     private RelativeLayout parentView;
+    private Button viewRouteBackBtn;
     //Other Variables
     private PalaceList listOfMyPalaces;
     private int palacePosition;
@@ -37,6 +39,25 @@ public class ViewRoute extends AppCompatActivity {
         setContentView(R.layout.activity_view_route);
 
         init();
+
+        viewRouteBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewRoute.this, routeSelector.class);
+
+                //Create a bundle to pass a PalaceList as an extra to the new activity
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("palaceList", listOfMyPalaces);
+                //Pass in the position of a current palace
+                bundle.putInt("palacePosition", palacePosition);
+                //Pass in the position of selected route
+                bundle.putInt("routePosition", routePosition);
+                intent.putExtras(bundle);
+
+                finish();//not sure if should finish the activity.
+                startActivity(intent);
+            }
+        });
     }
 
     public void init(){
@@ -48,6 +69,7 @@ public class ViewRoute extends AppCompatActivity {
         routePosition = bundle.getInt("routePosition");
 
         parentView = findViewById(R.id.viewRouteObjectsCardView);
+        viewRouteBackBtn = findViewById(R.id.viewRouteBackBtn);
 
         windowWidth = getWindowManager().getDefaultDisplay().getWidth();
         screenCenter = windowWidth / 2;

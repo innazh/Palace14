@@ -14,7 +14,7 @@ import memorypalace.palace14.classes.Palace;
 
 public class routeSelector  extends AppCompatActivity {
 
-    Button traverseRoute, viewEntireRoute, deleteRoute;
+    private Button traverseRoute, viewEntireRoute, deleteRoute, routeSelectorBackBtn;
     private PalaceList listOfMyPalaces;
     private int palacePosition;
     private int routePosition;
@@ -37,6 +37,15 @@ public class routeSelector  extends AppCompatActivity {
         traverseRoute = findViewById(R.id.traverse_route);
         viewEntireRoute = findViewById(R.id.view_entire_route);
         deleteRoute = findViewById(R.id.delete_route);
+        routeSelectorBackBtn = findViewById(R.id.routeSelectorBackBtn);
+
+        routeSelectorBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(routeSelector.this, MainActivity.class));
+            }
+        });
 
         traverseRoute.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

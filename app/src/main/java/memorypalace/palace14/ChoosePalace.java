@@ -5,20 +5,24 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 public class    ChoosePalace extends AppCompatActivity {
 
-    ImageView image1, image2, image3, image4;
-    TextView text1, text2, text3, text4;
-    TableRow row1, row2, row3, row4;
+    private ImageView image1, image2, image3, image4;
+    private TextView text1, text2, text3, text4;
+    private TableRow row1, row2, row3, row4;
+    private Button chooseTemplateBackBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_palace);
+
+        chooseTemplateBackBtn = findViewById(R.id.chooseTemplateBackBtn);
 
         //Find all table rows by id
         row1 = findViewById(R.id.row1);
@@ -74,6 +78,13 @@ public class    ChoosePalace extends AppCompatActivity {
                 Intent intent = new Intent(ChoosePalace.this, ChoosePalaceSave.class);
                 intent.putExtra("ImageName", "four");
                 startActivity(intent);
+            }
+        });
+
+        chooseTemplateBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

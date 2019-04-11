@@ -38,7 +38,7 @@ public class CreateRoute extends AppCompatActivity implements ObjectListAdapter.
     private ArrayList<Object_assoc> objects;
     private List<Object_assoc> selectedObjects;
     private List<Integer> selectedObjectsIdx;
-    private Button createRouteBtn;
+    private Button createRouteBtn, createRouteBackBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,6 +199,15 @@ public class CreateRoute extends AppCompatActivity implements ObjectListAdapter.
             }
         });
 
+        createRouteBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(CreateRoute.this, MainActivity.class));
+            }
+        });
+
+
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
         itemTouchHelper.attachToRecyclerView(objectsListView);
     }
@@ -219,6 +228,7 @@ public class CreateRoute extends AppCompatActivity implements ObjectListAdapter.
         objectsListView = findViewById(R.id.viewObjectListID);
         emptyObjectList = findViewById(R.id.emptyObjectsTV);
         createRouteBtn = findViewById(R.id.createRouteBtn);
+        createRouteBackBtn = findViewById(R.id.createRouteBackBtn);
         routeNameET = findViewById(R.id.routeName);
 
         if (currentPalace.getObjectListSize() < 1) {

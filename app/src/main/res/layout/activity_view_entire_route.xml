@@ -35,10 +35,22 @@
         android:layout_height="wrap_content"
         android:text="Reorder Route"
         app:layout_constraintBottom_toBottomOf="@+id/viewEntireRouteListID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/viewEntireRouteBackBtn"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textAllCaps="false"
         android:background="@color/leather"
         android:fontFamily="@font/berkleyb"/>
 
+    <Button
+        android:id="@+id/viewEntireRouteBackBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/leather"
+        android:fontFamily="@font/berkleyb"
+        android:text="Back to menu"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="@+id/viewEntireRouteListID"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/reorderRouteBtn" />
 
 </android.support.constraint.ConstraintLayout>

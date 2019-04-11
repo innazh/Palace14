@@ -18,7 +18,7 @@
         android:id="@+id/navigation_rename_palace"
         android:icon="@drawable/ic_edit_black_24dp"
         android:title="@string/rename_palace"
-        android:color="@color/white"/>
+        android:color="@color/white" />
 
     <item
         android:id="@+id/navigation_delete_palace"
