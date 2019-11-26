@@ -16,4 +16,4 @@ labeling each loci and associating specific thoughts, and maintaining all of it.
 - Defining a list of requirements for a project
 - System design development
 - Prototyping of a system
-- Android Studio development experiance 
+- Android Studio development experience 
